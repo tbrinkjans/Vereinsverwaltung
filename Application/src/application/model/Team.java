@@ -1,6 +1,6 @@
 package application.model;
 
-import application.base.BaseEntity;
+import application.common.BaseEntity;
 import java.util.Date;
 
 public class Team extends BaseEntity {

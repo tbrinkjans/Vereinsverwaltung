@@ -1,4 +1,4 @@
-package application.base;
+package application.common;
 
 public class BaseEntity {
 

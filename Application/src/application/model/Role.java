@@ -1,6 +1,7 @@
 package application.model;
 
-import application.base.BaseEntity;
+import application.common.BaseEntity;
+import application.enumeration.Permission;
 import java.util.List;
 
 public class Role extends BaseEntity {
@@ -34,11 +35,6 @@ public class Role extends BaseEntity {
 
     public List<Permission> getPermissions() {
         return permissions;
-    }
-    
-    // Permission
-    public enum Permission {
-        ADMIN;
     }
     
 }

@@ -1,6 +1,6 @@
 package application.model;
 
-import application.base.BaseEntity;
+import application.common.BaseEntity;
 
 public class Person extends BaseEntity {
     
