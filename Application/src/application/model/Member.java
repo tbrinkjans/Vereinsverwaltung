@@ -1,23 +1,18 @@
 package application.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 public class Member extends Person {
-    
+
     private String address;
-    private final List<Team> teams;
-    private final List<Role> roles;
-    
-    public Member(String id, String firstName, String lastName, String address, List<Team> teams, List<Role> roles) {
+    private Team[] teams;
+    private Role[] roles;
+
+    public Member(UUID id, String firstName, String lastName, String address, Team[] teams, Role[] roles) {
         super(id, firstName, lastName);
         this.address = address;
         this.teams = teams;
         this.roles = roles;
-    }
-    
-    public Member(String id, String firstName, String lastName, String address) {
-        this(id, firstName, lastName, address, new ArrayList<>(), new ArrayList<>());
     }
 
     public void setAddress(String address) {
@@ -28,11 +23,19 @@ public class Member extends Person {
         return address;
     }
 
-    public List<Team> getTeams() {
+    public void setTeams(Team[] teams) {
+        this.teams = teams;
+    }
+
+    public Team[] getTeams() {
         return teams;
     }
 
-    public List<Role> getRoles() {
+    public void setRoles(Role[] roles) {
+        this.roles = roles;
+    }
+
+    public Role[] getRoles() {
         return roles;
     }
 

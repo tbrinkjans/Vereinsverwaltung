@@ -2,15 +2,15 @@ package application.model;
 
 import application.common.BaseEntity;
 import application.enumeration.Permission;
-import java.util.List;
+import java.util.UUID;
 
 public class Role extends BaseEntity {
-    
+
     private String name;
     private String description;
-    private final List<Permission> permissions;
-    
-    public Role(String id, String name, String description, List<Permission> permissions) {
+    private Permission[] permissions;
+
+    public Role(UUID id, String name, String description, Permission[] permissions) {
         super(id);
         this.name = name;
         this.description = description;
@@ -20,7 +20,7 @@ public class Role extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -28,13 +28,17 @@ public class Role extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public String getDescription() {
         return description;
     }
 
-    public List<Permission> getPermissions() {
+    public void setPermissions(Permission[] permissions) {
+        this.permissions = permissions;
+    }
+
+    public Permission[] getPermissions() {
         return permissions;
     }
-    
+
 }

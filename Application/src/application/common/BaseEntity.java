@@ -1,15 +1,17 @@
 package application.common;
 
+import java.util.UUID;
+
 public class BaseEntity {
 
-    private final String id;
-    
-    public BaseEntity(String id) {
+    private final UUID id;
+
+    public BaseEntity(UUID id) {
         this.id = id;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
-    
+
 }
