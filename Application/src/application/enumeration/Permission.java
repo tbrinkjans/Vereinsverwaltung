@@ -2,6 +2,7 @@ package application.enumeration;
 
 public enum Permission {
 
-    ADMIN;
+    WRITE_MEMBERS,
+    READ_MEMBERS
 
 }

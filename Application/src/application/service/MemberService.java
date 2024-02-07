@@ -32,7 +32,7 @@ public class MemberService {
         return members;
     }
 
-    public List<Member> searchAll(Predicate predicate) {
+    public List<Member> searchAll(Predicate<Member> predicate) {
         return members.stream().filter(predicate).toList();
     }
 
