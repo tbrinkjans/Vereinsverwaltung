@@ -1,37 +1,25 @@
 package application.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class FinanceItem extends Item {
 
-    private String type;
-    private String[] labels;
     private int value;
     private String source;
+    private List<String> labels;
 
-    public FinanceItem(UUID id, String name, Date date, String type, String[] labels, int value, String source) {
+    public FinanceItem(UUID id, String name, Date date, int value, String source, List<String> labels) {
         super(id, name, date);
-        this.type = type;
-        this.labels = labels;
         this.value = value;
         this.source = source;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setLabels(String[] labels) {
         this.labels = labels;
     }
 
-    public String[] getLabels() {
-        return labels;
+    public FinanceItem(UUID id, String name, Date date, int value, String source) {
+        this(id, name, date, value, source, new ArrayList<>());
     }
 
     public void setValue(int value) {
@@ -48,6 +36,10 @@ public class FinanceItem extends Item {
 
     public String getSource() {
         return source;
+    }
+
+    public List<String> getLabels() {
+        return labels;
     }
 
 }
