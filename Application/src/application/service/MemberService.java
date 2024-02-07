@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class MemberService {
 
@@ -29,6 +30,10 @@ public class MemberService {
 
     public List<Member> getAll() {
         return members;
+    }
+
+    public List<Member> searchAll(Predicate predicate) {
+        return members.stream().filter(predicate).toList();
     }
 
     public void update(Member member) {
