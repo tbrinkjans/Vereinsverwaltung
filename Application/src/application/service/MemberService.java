@@ -13,6 +13,7 @@ public class MemberService {
     private final List<Member> members;
 
     public MemberService() {
+        // Datenbankanbindung später
         members = new ArrayList<>();
     }
 
@@ -32,8 +33,8 @@ public class MemberService {
         return members;
     }
 
-    public List<Member> searchAll(Predicate<Member> predicate) {
-        return members.stream().filter(predicate).toList();
+    public List<Member> searchAll(Predicate<Member> match) {
+        return members.stream().filter(match).toList();
     }
 
     public void update(Member member) {
