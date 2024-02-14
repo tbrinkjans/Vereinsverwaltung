@@ -1,5 +1,6 @@
 package application.model;
 
+import application.enumeration.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -7,8 +8,8 @@ import java.util.UUID;
 public class Member extends Person {
 
     private String address;
-    private final List<Team> teams;
-    private final List<Role> roles;
+    private List<Team> teams;
+    private List<Role> roles;
 
     public Member(UUID id, String firstName, String lastName, String address, List<Team> teams, List<Role> roles) {
         super(id, firstName, lastName);
@@ -29,12 +30,27 @@ public class Member extends Person {
         return address;
     }
 
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
     public List<Team> getTeams() {
         return teams;
     }
 
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public boolean hasPermission(Permission permission) {
+        return roles.stream()
+                .map(Role::getPermissions)
+                .flatMap(List::stream)
+                .anyMatch(p -> p.equals(permission));
     }
 
 }

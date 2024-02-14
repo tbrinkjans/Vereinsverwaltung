@@ -39,15 +39,13 @@ public class LoginGUI extends javax.swing.JFrame {
 
         tfFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
-                    btnLoginActionPerformed(null);
+                tfFirstNameKeyPressed(evt);
             }
         });
 
         tfLastName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
-                    btnLoginActionPerformed(null);
+                tfLastNameKeyPressed(evt);
             }
         });
 
@@ -59,8 +57,7 @@ public class LoginGUI extends javax.swing.JFrame {
         });
         btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
-                    btnLoginActionPerformed(null);
+                btnLoginKeyPressed(evt);
             }
         });
 
@@ -76,7 +73,7 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                            .addComponent(lblLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 60, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
@@ -105,11 +102,32 @@ public class LoginGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Event Handling">
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String firstName = tfFirstName.getText().trim();
-        String lastName = tfLastName.getText().trim();
+        login(tfFirstName.getText().trim(), tfLastName.getText().trim());
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            login(tfFirstName.getText().trim(), tfLastName.getText().trim());
+        }
+    }//GEN-LAST:event_btnLoginKeyPressed
+
+    private void tfFirstNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFirstNameKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            login(tfFirstName.getText().trim(), tfLastName.getText().trim());
+        }
+    }//GEN-LAST:event_tfFirstNameKeyPressed
+
+    private void tfLastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLastNameKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            login(tfFirstName.getText().trim(), tfLastName.getText().trim());
+        }
+    }// </editor-fold>//GEN-LAST:event_tfLastNameKeyPressed
+
+    private void login(String firstName, String lastName) {
         if (firstName.isEmpty() || lastName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ungültige Eingabe.");
+            showErrorDialog("Ungültige Eingabe.");
             return;
         }
 
@@ -117,17 +135,22 @@ public class LoginGUI extends javax.swing.JFrame {
         try {
             member = authService.authMember(firstName, lastName);
         } catch (EntityNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Mitglied nicht vorhanden.");
+            showErrorDialog("Mitglied nicht vorhanden.");
             return;
         }
 
-        if (!authService.hasPermission(member, Permission.READ_MEMBERS)) {
-            JOptionPane.showMessageDialog(this, "Keine Berechtigung.");
+        if (!member.hasPermission(Permission.READ_MEMBERS)) {
+            showErrorDialog("Keine Berechtigung.");
             return;
         }
 
         dispose();
-    }//GEN-LAST:event_btnLoginActionPerformed
+        System.out.println("Willkommen, " + member.getFirstName() + "!");
+    }
+
+    private void showErrorDialog(String message) {
+        JOptionPane.showMessageDialog(this, message, "Fehler", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
