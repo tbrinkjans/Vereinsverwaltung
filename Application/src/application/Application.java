@@ -16,7 +16,11 @@ public class Application {
     }
 
     public static <T> T getService(Class<T> cls) {
-        return services.stream().filter(cls::isInstance).map(cls::cast).findFirst().orElse(null);
+        return services.stream()
+                .filter(cls::isInstance)
+                .map(cls::cast)
+                .findFirst()
+                .orElse(null);
     }
 
     private static void registerServices() {

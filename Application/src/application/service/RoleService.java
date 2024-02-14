@@ -3,7 +3,6 @@ package application.service;
 import application.exception.EntityNotFoundException;
 import application.model.Role;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class RoleService {
@@ -20,11 +19,10 @@ public class RoleService {
     }
 
     public Role get(UUID id) {
-        Optional<Role> role = roles.stream().filter(r -> r.getId() == id).findFirst();
-        if (!role.isPresent()) {
-            throw new EntityNotFoundException(id);
-        }
-        return role.get();
+        return roles.stream()
+                .filter(r -> r.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     public List<Role> getAll() {

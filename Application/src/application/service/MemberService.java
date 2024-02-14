@@ -3,7 +3,6 @@ package application.service;
 import application.exception.EntityNotFoundException;
 import application.model.Member;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class MemberService {
@@ -20,11 +19,10 @@ public class MemberService {
     }
 
     public Member get(UUID id) {
-        Optional<Member> member = members.stream().filter(m -> m.getId() == id).findFirst();
-        if (!member.isPresent()) {
-            throw new EntityNotFoundException(id);
-        }
-        return member.get();
+        return members.stream()
+                .filter(m -> m.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     public List<Member> getAll() {
