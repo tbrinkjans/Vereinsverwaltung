@@ -2,19 +2,17 @@ package application.service;
 
 import application.exception.EntityNotFoundException;
 import application.model.Member;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 public class MemberService {
 
     private final List<Member> members;
 
-    public MemberService() {
+    public MemberService(List<Member> members) {
         // Datenbankanbindung später
-        members = new ArrayList<>();
+        this.members = members;
     }
 
     public void create(Member member) {
@@ -31,10 +29,6 @@ public class MemberService {
 
     public List<Member> getAll() {
         return members;
-    }
-
-    public List<Member> searchAll(Predicate<Member> match) {
-        return members.stream().filter(match).toList();
     }
 
     public void update(Member member) {

@@ -2,19 +2,17 @@ package application.service;
 
 import application.exception.EntityNotFoundException;
 import application.model.Role;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 public class RoleService {
 
     private final List<Role> roles;
 
-    public RoleService() {
+    public RoleService(List<Role> roles) {
         // Datenbankanbindung später
-        roles = new ArrayList<>();
+        this.roles = roles;
     }
 
     public void create(Role role) {
@@ -31,10 +29,6 @@ public class RoleService {
 
     public List<Role> getAll() {
         return roles;
-    }
-
-    public List<Role> searchAll(Predicate<Role> match) {
-        return roles.stream().filter(match).toList();
     }
 
     public void update(Role role) {
