@@ -29,7 +29,7 @@ public class LoginGUI extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle(Application.NAME + ": Login (v." + Application.VERSION + ")");
+        setTitle(Application.getTitle("Login"));
         setIconImage(new ImageIcon("res\\icon.png").getImage());
         setResizable(false);
 

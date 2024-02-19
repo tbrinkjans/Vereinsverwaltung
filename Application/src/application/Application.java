@@ -1,14 +1,14 @@
 package application;
 
+import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import application.gui.LoginGUI;
 import application.model.Member;
 import application.service.AuthService;
 import application.service.MemberService;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import java.awt.EventQueue;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Application {
 
@@ -20,6 +20,10 @@ public class Application {
     public static void main(String[] args) throws Exception {
         registerServices();
         createStartGUI();
+    }
+
+    public static String getTitle(String title) {
+        return NAME + ": " + title + " (v." + VERSION + ")";
     }
 
     public static <T> T getService(Class<T> cls) {
