@@ -12,50 +12,54 @@ public class dbHelper {
 
     private Connection con;
     private Statement stmt;
-    
-    public dbHelper(String url){
+
+    public dbHelper(String url) {
         this.url = url;
     }
-    
-    public void openDB() {
-        try{
-            con = DriverManager.getConnection("jdbc:sqlite:" + url);
-        } catch (Exception ex){
-            System.out.println("DB-Verbindung fehlgeschlagen "+ ex);
-        }
-        
+
+    public void open() throws SQLException {
         try {
+            System.out.println("DB-Verbindung zu " + url + " wird aufgebaut...");
+            con = DriverManager.getConnection("jdbc:sqlite:" + url);
             stmt = con.createStatement();
-        } catch (Exception ex){
-            System.out.println("Das SQL-Statment kann nicht erzeugt werden. "+ ex);
+            System.out.println("DB-Verbindung erfolgreich aufgebaut.");
+        } catch (SQLException ex) {
+            System.err.println("DB-Verbindung konnte nicht aufgebaut werden!");
+            throw ex;
         }
     }
-    
-    public ResultSet readRS(String SQL) {
+
+    public void write(String sql) throws SQLException {
+        try {
+            System.out.println("Führe SQL-Statement aus...\n" + sql);
+            stmt.execute(sql);
+        } catch (SQLException ex) {
+            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
+            throw ex;
+        }
+    }
+
+    public ResultSet read(String sql) throws SQLException {
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery(SQL);
-        }catch (Exception ex){
-            System.out.println("Das SQL-Statment kann nicht ausgeführt werden. "+ ex);
+            System.out.println("Führe SQL-Statement aus...\n" + sql);
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
+            throw ex;
         }
-        
         return rs;
     }
-    
-    public void changeDB (String SQL){
-        try{
-            stmt.execute(SQL);
-        }catch (SQLException ex){
-            System.out.println("Das SQL-Statment kann nicht ausgeführt werden. "+ ex);
-        }
-    }
-    
-    public void closeDB() {
-        try{
-            this.stmt.close();
-            this.con.close();
-        } catch (SQLException ex){
-            System.out.println("Die Datenbank konnte nicht richtig geschlossen werden. "+ ex);
+
+    public void close() throws SQLException {
+        try {
+            System.out.println("DB-Verbindung zu " + url + " wird abgebaut...");
+            stmt.close();
+            con.close();
+            System.out.println("DB-Verbindung erfolgreich abgebaut.");
+        } catch (SQLException ex) {
+            System.err.println("DB-Verbindung konnte nicht abgebaut werden!");
+            throw ex;
         }
     }
 
