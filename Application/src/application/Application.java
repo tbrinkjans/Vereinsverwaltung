@@ -1,5 +1,7 @@
 package application;
 
+import application.database.DatabaseContext;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -7,7 +9,9 @@ public class Application {
             System.err.println("Pfad zur Datenbank nicht gefunden!");
             return;
         }
-        dbHelper db = new dbHelper(args[0]);
+
+        String url = args[0];
+        DatabaseContext db = new DatabaseContext(url);
     }
 
 }
