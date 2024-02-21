@@ -5,6 +5,9 @@ import application.enumeration.Permission;
 import application.exception.EntityNotFoundException;
 import application.model.Member;
 import application.service.AuthService;
+
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -150,6 +153,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void showErrorDialog(String message) {
         JOptionPane.showMessageDialog(this, message, "Fehler", JOptionPane.ERROR_MESSAGE);
+        Toolkit.getDefaultToolkit().beep();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,7 +3,12 @@
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     },
-    "java.project.sourcePaths": ["src"],
+    "java.format.settings.url": ".vscode/formatter.xml",
     "java.project.outputPath": "build",
-    "java.format.settings.url": ".vscode/formatter.xml"
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
 }
