@@ -1,31 +1,33 @@
-
 package application;
-import java.sql.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class dbHelper {
+
+    private final String url;
+
     private Connection con;
     private Statement stmt;
     
-    
-    public dbHelper(){
-        
+    public dbHelper(String url){
+        this.url = url;
     }
     
     public void openDB() {
         try{
-            //Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:../../Vereinsverwaltung.db";
-            con = DriverManager.getConnection(url);
+            con = DriverManager.getConnection("jdbc:sqlite:" + url);
         } catch (Exception ex){
-            //ex.printStackTrace();
             System.out.println("DB-Verbindung fehlgeschlagen "+ ex);
         }
         
         try {
             stmt = con.createStatement();
         } catch (Exception ex){
-            //System.out.println("Das SQL-Statment kann nicht erzeugt werden. "+ ex);
+            System.out.println("Das SQL-Statment kann nicht erzeugt werden. "+ ex);
         }
     }
     
@@ -56,5 +58,5 @@ public class dbHelper {
             System.out.println("Die Datenbank konnte nicht richtig geschlossen werden. "+ ex);
         }
     }
-}
 
+}
