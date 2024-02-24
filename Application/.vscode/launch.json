@@ -3,15 +3,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Application (run)",
-            "request": "launch",
-            "mainClass": "${file}",
-            "args": [
-                "${workspaceFolder}\\..\\..\\Database.db"
-            ]
-        },
-        {
-            "type": "java",
             "name": "Application",
             "request": "launch",
             "mainClass": "application.Application",
