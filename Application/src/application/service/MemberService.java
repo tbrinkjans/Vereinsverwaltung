@@ -1,9 +1,10 @@
 package application.service;
 
-import application.exception.EntityNotFoundException;
-import application.model.Member;
 import java.util.List;
 import java.util.UUID;
+
+import application.exception.EntityNotFoundException;
+import application.model.Member;
 
 public class MemberService {
 
@@ -20,9 +21,9 @@ public class MemberService {
 
     public Member get(UUID id) {
         return members.stream()
-                .filter(m -> m.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new EntityNotFoundException(id));
+            .filter(m -> m.getId() == id)
+            .findFirst()
+            .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     public List<Member> getAll() {

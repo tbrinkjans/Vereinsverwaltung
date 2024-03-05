@@ -1,8 +1,9 @@
 package application.model;
 
-import application.common.BaseEntity;
 import java.util.Date;
 import java.util.UUID;
+
+import application.common.BaseEntity;
 
 public class Item extends BaseEntity {
 

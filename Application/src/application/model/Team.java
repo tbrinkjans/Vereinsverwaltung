@@ -1,7 +1,8 @@
 package application.model;
 
-import application.common.BaseEntity;
 import java.util.UUID;
+
+import application.common.BaseEntity;
 
 public class Team extends BaseEntity {
 
