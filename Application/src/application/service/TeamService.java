@@ -1,9 +1,10 @@
 package application.service;
 
-import application.exception.EntityNotFoundException;
-import application.model.Team;
 import java.util.List;
 import java.util.UUID;
+
+import application.exception.EntityNotFoundException;
+import application.model.Team;
 
 public class TeamService {
 
@@ -20,9 +21,9 @@ public class TeamService {
 
     public Team get(UUID id) {
         return teams.stream()
-                .filter(t -> t.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new EntityNotFoundException(id));
+            .filter(t -> t.getId() == id)
+            .findFirst()
+            .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     public List<Team> getAll() {
