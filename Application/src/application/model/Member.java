@@ -1,9 +1,10 @@
 package application.model;
 
-import application.enumeration.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import application.enumeration.Permission;
 
 public class Member extends Person {
 
@@ -48,9 +49,9 @@ public class Member extends Person {
 
     public boolean hasPermission(Permission permission) {
         return roles.stream()
-                .map(Role::getPermissions)
-                .flatMap(List::stream)
-                .anyMatch(p -> p.equals(permission));
+            .map(Role::getPermissions)
+            .flatMap(List::stream)
+            .anyMatch(p -> p.equals(permission));
     }
 
 }

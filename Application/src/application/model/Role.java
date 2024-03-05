@@ -1,10 +1,11 @@
 package application.model;
 
-import application.common.BaseEntity;
-import application.enumeration.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import application.common.BaseEntity;
+import application.enumeration.Permission;
 
 public class Role extends BaseEntity {
 

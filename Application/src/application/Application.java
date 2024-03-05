@@ -3,8 +3,11 @@ package application;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+
+import application.database.DatabaseContext;
 import application.gui.LoginGUI;
 import application.model.Member;
 import application.service.AuthService;
@@ -16,8 +19,14 @@ public class Application {
     public static final String VERSION = "0.1";
 
     private static List<Object> services;
+    private static DatabaseContext context;
 
     public static void main(String[] args) throws Exception {
+        if (args.length == 0) {
+            System.err.println("Pfad zur Datenbank nicht gefunden!");
+            return;
+        }
+        createDbContext(args[0]);
         registerServices();
         createStartGUI();
     }
@@ -28,10 +37,10 @@ public class Application {
 
     public static <T> T getService(Class<T> cls) {
         return services.stream()
-                .filter(cls::isInstance)
-                .map(cls::cast)
-                .findFirst()
-                .orElse(null);
+            .filter(cls::isInstance)
+            .map(cls::cast)
+            .findFirst()
+            .orElse(null);
     }
 
     private static void registerServices() {
@@ -40,6 +49,10 @@ public class Application {
         services = new ArrayList<>();
         services.add(new AuthService(members));
         services.add(new MemberService(members));
+    }
+
+    private static void createDbContext(String url) {
+        context = new DatabaseContext(url);
     }
 
     private static void createStartGUI() throws Exception {

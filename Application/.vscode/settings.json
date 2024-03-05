@@ -1,9 +1,12 @@
 {
+    // formatting
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     },
     "java.format.settings.url": ".vscode/formatter.xml",
+
+    // project settings
     "java.project.outputPath": "build",
     "java.project.sourcePaths": [
         "src"
