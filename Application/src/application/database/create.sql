@@ -6,9 +6,9 @@ CREATE TABLE 'role' (
 );
 CREATE TABLE 'members'(
     'id' varchar(36),
-    'family_name' text,
-    'name' text,
-    'adress' text,
+    'last_name' text,
+    'first_name' text,
+    'address' text,
     PRIMARY KEY ('id')
 );
 CREATE TABLE 'member_role'(
@@ -20,7 +20,7 @@ CREATE TABLE 'member_role'(
     FOREIGN KEY ('role_id') REFERENCES 'role'('id') ON DELETE RESTRICT ON UPDATE CASCADE
 
 );
-CREATE TABLE 'is_part_of'(
+CREATE TABLE 'is_part_of_team'(
     'id' varchar(36),
     'teams_id' varchar(36),
     'members_id' varchar(36),
@@ -37,7 +37,7 @@ CREATE TABLE 'teams'(
 CREATE TABLE 'room'(
     'id' varchar(36),
     'size' text,
-    'adress' text,
+    'address' text,
     'inside' boolean,
     'name' text,
     'description' text,
