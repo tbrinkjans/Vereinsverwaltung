@@ -5,9 +5,12 @@ import java.util.List;
 
 import application.database.DatabaseContext;
 import application.model.Member;
+
 import application.model.Team;
-import application.service.MemberService;
 import application.service.TeamService;
+import application.model.Role;
+import application.service.MemberService;
+import application.service.RoleService;
 
 public class Application {
 
@@ -34,10 +37,12 @@ public class Application {
     private static void registerServices() {
         List<Member> members = new ArrayList<>();
         List<Team> teams = new ArrayList<>();
+        List<Role> roles = new ArrayList<>();
 
         services = new ArrayList<>();
         services.add(new MemberService(members));
         services.add(new TeamService(teams));
+        services.add(new RoleService(roles));
     }
 
     private static void createDbContext(String url) {
