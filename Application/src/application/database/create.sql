@@ -18,7 +18,6 @@ CREATE TABLE 'member_role'(
     PRIMARY KEY ('id'),
     FOREIGN KEY ('members_id') REFERENCES 'members'('id') ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY ('role_id') REFERENCES 'role'('id') ON DELETE RESTRICT ON UPDATE CASCADE
-
 );
 CREATE TABLE 'members_team'(
     'id' varchar(36),
