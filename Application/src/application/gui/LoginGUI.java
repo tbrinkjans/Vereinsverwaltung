@@ -1,9 +1,6 @@
 package application.gui;
 
-import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 import application.Application;
 import application.enumeration.Permission;
@@ -11,6 +8,7 @@ import application.exception.EntityNotFoundException;
 import application.model.Member;
 import application.service.AuthService;
 import application.service.MemberService;
+import application.util.Dialog;
 
 public class LoginGUI extends javax.swing.JFrame {
 
@@ -108,8 +106,8 @@ public class LoginGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="Event Handling">
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    // <editor-fold defaultstate="collapsed" desc="Event Handling">//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
         login(tfFirstName.getText().trim(), tfLastName.getText().trim());
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -133,7 +131,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void login(String firstName, String lastName) {
         if (firstName.isEmpty() || lastName.isEmpty()) {
-            showErrorDialog("Ungültige Eingabe.");
+            Dialog.showErrorDialog("Ungültige Eingabe.", this);
             return;
         }
 
@@ -141,25 +139,21 @@ public class LoginGUI extends javax.swing.JFrame {
         try {
             member = authService.authMember(firstName, lastName);
         } catch (EntityNotFoundException ex) {
-            showErrorDialog("Mitglied nicht vorhanden.");
+            Dialog.showErrorDialog("Mitglied nicht vorhanden.", this);
             return;
         }
 
         if (!member.hasPermission(Permission.READ_MEMBERS)) {
-            showErrorDialog("Keine Berechtigung.");
+            Dialog.showErrorDialog("Keine Berechtigung.", this);
             return;
         }
 
-        dispose();
-        System.out.println("Willkommen, " + member.getFirstName() + "!");
-        
-        MemberService memberService = Application.getService(MemberService.class);
-        new UserDetailGUI(memberService).setVisible(true);
+        openDetailGUI(member);
     }
 
-    private void showErrorDialog(String message) {
-        Toolkit.getDefaultToolkit().beep();
-        JOptionPane.showMessageDialog(this, message, "Fehler", JOptionPane.ERROR_MESSAGE);
+    private void openDetailGUI(Member member) {
+        MemberService memberService = Application.getService(MemberService.class);
+        new MemberDetailGUI(member.getId(), memberService).setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

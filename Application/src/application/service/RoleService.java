@@ -11,7 +11,6 @@ public class RoleService {
     private final List<Role> roles;
 
     public RoleService(List<Role> roles) {
-        // Datenbankanbindung später
         this.roles = roles;
     }
 
@@ -21,7 +20,7 @@ public class RoleService {
 
     public Role get(UUID id) {
         return roles.stream()
-            .filter(r -> r.getId() == id)
+            .filter(r -> r.getId().equals(id))
             .findFirst()
             .orElseThrow(() -> new EntityNotFoundException(id));
     }

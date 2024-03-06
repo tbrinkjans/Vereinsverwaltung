@@ -11,7 +11,6 @@ public class MemberService {
     private final List<Member> members;
 
     public MemberService(List<Member> members) {
-        // Datenbankanbindung später
         this.members = members;
     }
 
@@ -26,12 +25,6 @@ public class MemberService {
             .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
-    public List<Member> findByName(String firstName, String lastName) {
-        return members.stream()
-            .filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
-            .toList();
-    }
-    
     public List<Member> getAll() {
         return members;
     }
