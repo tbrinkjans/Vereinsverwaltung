@@ -11,7 +11,6 @@ public class MemberService {
     private final List<Member> members;
 
     public MemberService(List<Member> members) {
-        // Datenbankanbindung später
         this.members = members;
     }
 
@@ -21,7 +20,7 @@ public class MemberService {
 
     public Member get(UUID id) {
         return members.stream()
-            .filter(m -> m.getId() == id)
+            .filter(m -> m.getId().equals(id))
             .findFirst()
             .orElseThrow(() -> new EntityNotFoundException(id));
     }

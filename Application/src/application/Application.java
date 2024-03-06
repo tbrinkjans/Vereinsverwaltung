@@ -20,7 +20,6 @@ import application.service.TeamService;
 public class Application {
 
     public static final String NAME = "Vereinsverwaltung";
-    public static final String VERSION = "0.1";
 
     private static List<Object> services;
     private static DatabaseContext context;
@@ -36,7 +35,7 @@ public class Application {
     }
 
     public static String getTitle(String title) {
-        return NAME + ": " + title + " (v." + VERSION + ")";
+        return NAME + ": " + title;
     }
 
     public static <T> T getService(Class<T> cls) {

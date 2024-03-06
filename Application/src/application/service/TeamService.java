@@ -11,7 +11,6 @@ public class TeamService {
     private final List<Team> teams;
 
     public TeamService(List<Team> teams) {
-        // Datenbankanbindung später
         this.teams = teams;
     }
 
@@ -21,7 +20,7 @@ public class TeamService {
 
     public Team get(UUID id) {
         return teams.stream()
-            .filter(t -> t.getId() == id)
+            .filter(t -> t.getId().equals(id))
             .findFirst()
             .orElseThrow(() -> new EntityNotFoundException(id));
     }
