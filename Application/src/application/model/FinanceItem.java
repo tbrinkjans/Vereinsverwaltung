@@ -38,6 +38,10 @@ public class FinanceItem extends Item {
         return source;
     }
 
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
+    }
+
     public List<String> getLabels() {
         return labels;
     }
