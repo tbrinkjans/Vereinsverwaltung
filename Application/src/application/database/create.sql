@@ -4,6 +4,19 @@ CREATE TABLE 'role' (
     'description' text,
     PRIMARY KEY ('id')
 );
+CREATE TABLE 'permission'(
+    'id' varchar(36),
+    'permission' text,
+    PRIMARY KEY ('id')
+);
+CREATE TABLE 'permission_role'(
+    'id' varchar(36),
+    'role_id' varchar(36),
+    'permission_id' varchar(36),
+    PRIMARY KEY ('id'),
+    FOREIGN KEY ('role_id') REFERENCES 'role'('id') ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY ('permission_id') REFERENCES 'permission'('id') ON DELETE RESTRICT ON UPDATE CASCADE
+);
 CREATE TABLE 'members'(
     'id' varchar(36),
     'last_name' text,
