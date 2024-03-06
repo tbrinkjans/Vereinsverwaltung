@@ -20,7 +20,7 @@ CREATE TABLE 'member_role'(
     FOREIGN KEY ('role_id') REFERENCES 'role'('id') ON DELETE RESTRICT ON UPDATE CASCADE
 
 );
-CREATE TABLE 'is_part_of_team'(
+CREATE TABLE 'members_team'(
     'id' varchar(36),
     'teams_id' varchar(36),
     'members_id' varchar(36),
