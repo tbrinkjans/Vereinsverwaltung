@@ -10,6 +10,7 @@ import application.enumeration.Permission;
 import application.exception.EntityNotFoundException;
 import application.model.Member;
 import application.service.AuthService;
+import application.service.MemberService;
 
 public class LoginGUI extends javax.swing.JFrame {
 
@@ -151,6 +152,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
         dispose();
         System.out.println("Willkommen, " + member.getFirstName() + "!");
+        
+        MemberService memberService = Application.getService(MemberService.class);
+        new UserDetailGUI(memberService).setVisible(true);
     }
 
     private void showErrorDialog(String message) {

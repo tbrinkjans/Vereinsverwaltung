@@ -21,16 +21,18 @@ public class MemberService {
 
     public Member get(UUID id) {
         return members.stream()
-            .filter(m -> m.getId() == id)
+            .filter(m -> m.getId().equals(id))
             .findFirst()
             .orElseThrow(() -> new EntityNotFoundException(id));
     }
 
-    public List<Member> getAll() {
-        return members;
+    public List<Member> findByName(String firstName, String lastName) {
+        return members.stream()
+            .filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
+            .toList();
     }
     
-    public List <Member> findbyname(String firstname, String lastname){
+    public List<Member> getAll() {
         return members;
     }
 
@@ -44,10 +46,5 @@ public class MemberService {
         Member delete = get(id);
         members.remove(delete);
     }
-public List<Member> findByName(String firstName, String lastName) {
-    return members.stream()
-                 .filter(m -> m.getFirstName().equals(firstName) && m.getLastName().equals(lastName))
-                 .toList();
-}
 
 }
