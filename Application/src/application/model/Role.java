@@ -1,16 +1,17 @@
 package application.model;
 
-import application.common.BaseEntity;
-import application.enumeration.Permission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import application.common.BaseEntity;
+import application.enumeration.Permission;
 
 public class Role extends BaseEntity {
 
     private String name;
     private String description;
-    private final List<Permission> permissions;
+    private List<Permission> permissions;
 
     public Role(UUID id, String name, String description, List<Permission> permissions) {
         super(id);
@@ -37,6 +38,10 @@ public class Role extends BaseEntity {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     public List<Permission> getPermissions() {
