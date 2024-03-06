@@ -1,23 +1,24 @@
-CREATE TABLE 'members_number'(
-    'id' varchar(36),
-    PRIMARY KEY ('id')
-);
 CREATE TABLE 'role' (
     'id' varchar(36),
     'name' text,
-    'members_number_id' varchar(36),
     'description' text,
-    PRIMARY KEY ('id'),
-    FOREIGN KEY ('members_number_id') REFERENCES 'members_number'('id') ON DELETE RESTRICT ON UPDATE CASCADE
+    PRIMARY KEY ('id')
 );
 CREATE TABLE 'members'(
     'id' varchar(36),
     'family_name' text,
     'name' text,
     'adress' text,
-    'members_number_id' varchar(36),
+    PRIMARY KEY ('id')
+);
+CREATE TABLE 'member_role'(
+    'id' varchar(36),
+    'members_id' varchar(36),
+    'role_id' varchar(36),
     PRIMARY KEY ('id'),
-    FOREIGN KEY ('members_number_id') REFERENCES 'members_number'('id') ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY ('members_id') REFERENCES 'members'('id') ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY ('role_id') REFERENCES 'role'('id') ON DELETE RESTRICT ON UPDATE CASCADE
+
 );
 CREATE TABLE 'is_part_of'(
     'id' varchar(36),
