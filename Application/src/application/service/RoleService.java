@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class RoleService {
 
-    private  List<Role> roles = new ArrayList<Role>();
+    private  List<Role> roles = new ArrayList<>();
     private final DatabaseContext context;
     private ResultSet rs = null;
     private Role role;
@@ -109,7 +109,7 @@ public class RoleService {
     private Role roleFromResultSet(ResultSet rs) throws SQLException{
         String permissions = rs.getString("permissions");
         String[] permissionArray = permissions.split(",");
-        List<String> permissionsList = new ArrayList<String>();
+        List<String> permissionsList = new ArrayList<>();
         for (String singlePermission : permissionArray){
             permissionsList.add(singlePermission);
         }       
