@@ -11,9 +11,9 @@ public class Role extends BaseEntity {
 
     private String name;
     private String description;
-    private List<Permission> permissions;
+    private List<String> permissions;
 
-    public Role(UUID id, String name, String description, List<Permission> permissions) {
+    public Role(UUID id, String name, String description, List<String> permissions) {
         super(id);
         this.name = name;
         this.description = description;
@@ -40,11 +40,11 @@ public class Role extends BaseEntity {
         return description;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(List<String> permissions) {
         this.permissions = permissions;
     }
 
-    public List<Permission> getPermissions() {
+    public List<String> getPermissions() {
         return permissions;
     }
 
