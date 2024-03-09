@@ -4,7 +4,6 @@ import application.database.DatabaseContext;
 import java.util.List;
 import java.util.UUID;
 
-import application.exception.EntityNotFoundException;
 import application.model.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,7 +88,7 @@ public class TeamService {
             System.err.println( ex);
         }
     }
-     private Team teamFromResultSet(ResultSet rs) throws SQLException{
+    private Team teamFromResultSet(ResultSet rs) throws SQLException{
           
         return new Team(UUID.fromString(rs.getString("id")),rs.getString("name"),rs.getString("activity"));
     }
