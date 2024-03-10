@@ -10,6 +10,7 @@ import application.model.Role;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import application.enumeration.Permission;
 
 public class RoleService {
 
@@ -48,6 +49,9 @@ public class RoleService {
         try{
             context.open();
             rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                System.out.println("Das ResultSet ist leer");
+            }
             while(rs.next()){
                 role = this.roleFromResultSet(rs);
             }
@@ -70,6 +74,9 @@ public class RoleService {
         try{
             context.open();
             rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                System.out.println("Das ResultSet ist leer");
+            }
             while(rs.next()){  
                 roles.add(roleFromResultSet(rs));
             }
@@ -83,7 +90,7 @@ public class RoleService {
     }
 
     public void update(Role role) {
-        String  sql = "UPDATE roles SET name = "+ role.getName() + ", description = " + role.getDescription() +" Where id = " + role.getId().toString() +";";
+        String  sql = "UPDATE roles SET name = "+ role.getName() + ", description = " + role.getDescription() +" Where id = '" + role.getId().toString() +"';";
         try{
             context.open();
             context.write(sql);
@@ -95,7 +102,7 @@ public class RoleService {
     }
 
     public void delete(UUID id) {
-        String  sql = "DELETE FROM role WHERE id = " + id + ";";
+        String  sql = "DELETE FROM role WHERE id = '" + id + "';";
         try{
             context.open();
             context.write(sql);
@@ -109,9 +116,9 @@ public class RoleService {
     private Role roleFromResultSet(ResultSet rs) throws SQLException{
         String permissions = rs.getString("permissions");
         String[] permissionArray = permissions.split(",");
-        List<String> permissionsList = new ArrayList<>();
+        List<Permission> permissionsList = new ArrayList<>();
         for (String singlePermission : permissionArray){
-            permissionsList.add(singlePermission);
+            permissionsList.add(Permission.valueOf(singlePermission));
         }       
         return new Role(UUID.fromString(rs.getString("id")),rs.getString("name"),rs.getString("description"),permissionsList);
     }

@@ -34,10 +34,13 @@ public class TeamService {
     }
 
     public Team get(UUID id) {
-        String sql = "SELECT id, name, activity FROM teams WHERE id = " + id +";";
+        String sql = "SELECT id, name, activity FROM teams WHERE id = '" + id +"';";
         try{
             context.open();
             rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                System.out.println("Das ResultSet ist leer");
+            }
             while(rs.next()){  
                team = this.teamFromResultSet(rs);
             }
@@ -54,6 +57,9 @@ public class TeamService {
         try{
             context.open();
             rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                System.out.println("Das ResultSet ist leer");
+            }
             while(rs.next()){  
                 teams.add(teamFromResultSet(rs));
             }
@@ -66,7 +72,7 @@ public class TeamService {
     }
 
     public void update(Team team) {
-        String  sql = "UPDATE teams SET name = "+ team.getName() + ", activity = " + team.getActivity() +" Where id = " + team.getId().toString() +";";
+        String  sql = "UPDATE teams SET name = "+ team.getName() + ", activity = " + team.getActivity() +" Where id = '" + team.getId().toString() +"';";
         try{
             context.open();
             context.write(sql);
@@ -78,7 +84,7 @@ public class TeamService {
     }
 
     public void delete(UUID id) {
-        String  sql = "DELETE FROM teams WHERE id = " + id + ";";
+        String  sql = "DELETE FROM teams WHERE id = '" + id + "';";
         try{
             context.open();
             context.write(sql);

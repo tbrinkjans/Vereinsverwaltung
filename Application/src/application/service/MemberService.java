@@ -17,9 +17,13 @@ public class MemberService {
     private final DatabaseContext context;
     private ResultSet rs = null;
     private Member member;
+    private final TeamService teamService;
+    private final RoleService roleService;
 
     public MemberService(DatabaseContext context) {
         this.context = context;
+        teamService = new TeamService(context);
+        roleService = new RoleService(context);
     }
 
     public void create(Member member) {
@@ -33,6 +37,20 @@ public class MemberService {
             System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
             System.err.println( ex);
         }
+        for (Team teams :member.getTeams()){
+            if (teamService.get(teams.getId()) == null){
+                teamService.create(teams);
+            }else{
+                setTeamRelation(member.getId(), teams.getId());
+            }
+        }
+        for (Role role :member.getRoles()){
+            if (roleService.get(role.getId()) == null){
+                roleService.create(role);
+            }else{
+                setRoleRelation(member.getId(), role.getId());
+            }
+        }
     }
 
     public Member get(UUID id) {
@@ -42,10 +60,13 @@ public class MemberService {
                     "ON members.id = member_role.members_id " +
                     "LEFT JOIN members_team " +
                     "ON members.id = members_team.members_id " +
-                    "WHERE id = " + id +";";
+                    "WHERE members.id = '" + id +"';";
         try{
             context.open();
             rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                System.out.println("Das ResultSet ist leer");
+            }
             while(rs.next()){  
                member = this.memberFromResultSet(rs);
             }
@@ -67,6 +88,9 @@ public class MemberService {
         try{
             context.open();
             rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                System.out.println("Das ResultSet ist leer");
+            }
             while(rs.next()){  
                 members.add(memberFromResultSet(rs));
             }
@@ -88,6 +112,14 @@ public class MemberService {
             System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
             System.err.println( ex);
         }
+        for (Team teams :member.getTeams()){
+            teamService.update(teams);
+            setTeamRelation(member.getId(), teams.getId());
+        }
+        for (Role role :member.getRoles()){
+            roleService.update(role);
+            setRoleRelation(member.getId(), role.getId());
+        }
     }
 
     public void delete(UUID id) {
@@ -103,18 +135,49 @@ public class MemberService {
     }
     
     private Member memberFromResultSet(ResultSet rs) throws SQLException{
-        TeamService teamService = new TeamService(context);
-        RoleService roleService = new RoleService(context);
         List<Team> teams = new ArrayList<>();
         List<Role> roles = new ArrayList<>();
         teams.add(teamService.get(UUID.fromString(rs.getString("teams_id"))));
         roles.add(roleService.get(UUID.fromString(rs.getString("role_id"))));
-        return new Member(UUID.fromString(rs.getString("id")),rs.getString("firstName"),rs.getString("lastName"),rs.getString("address"), teams, roles);
+        System.out.println(rs.getString("id"));
+        return new Member(UUID.fromString(rs.getString("id")),rs.getString("first_name"),rs.getString("last_name"),rs.getString("address"), teams, roles);
     }
     
     private String roleToString(Member member){
         
         return member.getId().toString()+","+member.getLastName()+","+member.getFirstName()+","+member.getAddress();
+    }
+    
+    private void setTeamRelation(UUID members_id, UUID team_id){
+        String sql = "SELECT * FROM member_role WHERE members_id = '"+ members_id +"' AND role_id = '"+ team_id +"';";
+        try{
+            context.open();
+            rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                String updateSQL = "INSERT INTO member_role (id, members_id, teams_id) VALUES ('"+ UUID.randomUUID() +"', '"+ members_id +"', '"+ team_id +"')";
+                context.write(updateSQL);
+            }
+            context.close();
+        }catch (SQLException ex) {
+            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
+            System.err.println( ex);
+        }
+    }
+    
+    private void setRoleRelation(UUID members_id, UUID role_id){
+        String sql = "SELECT * FROM member_role WHERE members_id = '"+ members_id +"' AND role_id = '"+ role_id +"';";
+        try{
+            context.open();
+            rs = context.read(sql);
+            if (!rs.isBeforeFirst()){
+                String updateSQL = "INSERT INTO member_role (id, members_id, role_id) VALUES ('"+ UUID.randomUUID() +"', '"+ members_id +"', '"+ role_id +"')";
+                context.write(updateSQL);
+            }
+            context.close();
+        }catch (SQLException ex) {
+            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
+            System.err.println( ex);
+        }
     }
 
 }
