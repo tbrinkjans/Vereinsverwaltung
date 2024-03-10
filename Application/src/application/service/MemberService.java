@@ -92,7 +92,7 @@ public class MemberService {
                 System.out.println("Das ResultSet ist leer");
             }
             while(rs.next()){  
-                members.add(memberFromResultSet(rs));
+                members.add(this.memberFromResultSet(rs));
             }
             context.close();
         }catch (SQLException ex) {
@@ -139,7 +139,6 @@ public class MemberService {
         List<Role> roles = new ArrayList<>();
         teams.add(teamService.get(UUID.fromString(rs.getString("teams_id"))));
         roles.add(roleService.get(UUID.fromString(rs.getString("role_id"))));
-        System.out.println(rs.getString("id"));
         return new Member(UUID.fromString(rs.getString("id")),rs.getString("first_name"),rs.getString("last_name"),rs.getString("address"), teams, roles);
     }
     
