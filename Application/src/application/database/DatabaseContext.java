@@ -10,7 +10,7 @@ public class DatabaseContext {
 
     private final String url;
 
-    private Connection con;
+    private Connection conn;
     private Statement stmt;
 
     public DatabaseContext(String url) {
@@ -20,8 +20,8 @@ public class DatabaseContext {
     public void open() throws SQLException {
         try {
             System.out.println("DB-Verbindung zu " + url + " wird aufgebaut...");
-            con = DriverManager.getConnection("jdbc:sqlite:" + url);
-            stmt = con.createStatement();
+            conn = DriverManager.getConnection("jdbc:sqlite:" + url);
+            stmt = conn.createStatement();
             System.out.println("DB-Verbindung erfolgreich aufgebaut.");
         } catch (SQLException ex) {
             System.err.println("DB-Verbindung konnte nicht aufgebaut werden!");
@@ -29,14 +29,16 @@ public class DatabaseContext {
         }
     }
 
-    public void write(String sql) throws SQLException {
+    public int write(String sql) throws SQLException {
+        int rows;
         try {
             System.out.println("Führe SQL-Statement aus...\n" + sql);
-            stmt.execute(sql);
+            rows = stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
             throw ex;
         }
+        return rows;
     }
 
     public ResultSet read(String sql) throws SQLException {
@@ -55,7 +57,7 @@ public class DatabaseContext {
         try {
             System.out.println("DB-Verbindung zu " + url + " wird abgebaut...");
             stmt.close();
-            con.close();
+            conn.close();
             System.out.println("DB-Verbindung erfolgreich abgebaut.");
         } catch (SQLException ex) {
             System.err.println("DB-Verbindung konnte nicht abgebaut werden!");

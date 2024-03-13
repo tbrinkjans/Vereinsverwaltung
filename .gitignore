@@ -1,7 +1,3 @@
-# Java
-*.class
-*.jar
-
 # NetBeans
 /Application/nbproject/private/
 /Application/build/
