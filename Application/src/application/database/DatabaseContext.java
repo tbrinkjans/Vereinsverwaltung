@@ -6,25 +6,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.sqlite.SQLiteConfig;
+
+import application.util.Time;
+
 public class DatabaseContext {
 
     private final String url;
+    private final SQLiteConfig config;
 
     private Connection conn;
     private Statement stmt;
 
     public DatabaseContext(String url) {
         this.url = url;
+
+        this.config = new SQLiteConfig();
+        this.config.enforceForeignKeys(true);
     }
 
     public void open() throws SQLException {
         try {
-            System.out.println("DB-Verbindung zu " + url + " wird aufgebaut...");
-            conn = DriverManager.getConnection("jdbc:sqlite:" + url);
+            System.out.printf("\n[%s] DB-Verbindung wird aufgebaut... ", Time.getTime());
+            conn = DriverManager.getConnection("jdbc:sqlite:" + url, config.toProperties());
             stmt = conn.createStatement();
-            System.out.println("DB-Verbindung erfolgreich aufgebaut.");
+            System.out.println("ERFOLGREICH!");
         } catch (SQLException ex) {
-            System.err.println("DB-Verbindung konnte nicht aufgebaut werden!");
+            System.out.println("FEHLGESCHLAGEN!");
             throw ex;
         }
     }
@@ -32,10 +40,10 @@ public class DatabaseContext {
     public int write(String sql) throws SQLException {
         int rows;
         try {
-            System.out.println("Führe SQL-Statement aus...\n" + sql);
+            System.out.printf("[%s] Führe SQL-Statement aus:\n%s\n", Time.getTime(), sql);
             rows = stmt.executeUpdate(sql);
         } catch (SQLException ex) {
-            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
+            System.out.println("Das SQL-Statement konnte nicht ausgeführt werden!");
             throw ex;
         }
         return rows;
@@ -44,7 +52,7 @@ public class DatabaseContext {
     public ResultSet read(String sql) throws SQLException {
         ResultSet rs = null;
         try {
-            System.out.println("Führe SQL-Statement aus...\n" + sql);
+            System.out.printf("[%s] Führe SQL-Statement aus:\n%s\n", Time.getTime(), sql);
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
@@ -55,15 +63,14 @@ public class DatabaseContext {
 
     public void close() throws SQLException {
         try {
-            System.out.println("DB-Verbindung zu " + url + " wird abgebaut...");
+            System.out.printf("[%s] DB-Verbindung wird abgebaut... ", Time.getTime());
             stmt.close();
             conn.close();
-            System.out.println("DB-Verbindung erfolgreich abgebaut.");
+            System.out.println("ERFOLGREICH!");
         } catch (SQLException ex) {
-            System.err.println("DB-Verbindung konnte nicht abgebaut werden!");
+            System.out.println("FEHLGESCHLAGEN!");
             throw ex;
         }
     }
-    
 
 }

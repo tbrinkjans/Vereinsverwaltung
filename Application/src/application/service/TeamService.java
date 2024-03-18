@@ -1,107 +1,132 @@
 package application.service;
 
-import application.database.DatabaseContext;
-import java.util.List;
-import java.util.UUID;
-
-import application.model.Team;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import application.database.DatabaseContext;
+import application.exception.EntityNotFoundException;
+import application.model.Team;
 
 public class TeamService {
 
-    private final List<Team> teams = new ArrayList<>();
     private final DatabaseContext context;
-    private ResultSet rs = null;
-    private Team team;
 
     public TeamService(DatabaseContext context) {
-         this.context = context;
+        this.context = context;
     }
 
     public void create(Team team) {
-        String  sql = "INSERT INTO teams (id, name, activity) "
-                + "VALUES("+roleToString(team)+")";
-        try{
+        try {
             context.open();
+
+            String sqlTemplate = """
+                INSERT INTO "team" ("id", "name", "activity")
+                VALUES ('%s', '%s', '%s');""";
+            String sql = String.format(sqlTemplate, team.getId().toString(), team.getName(), team.getActivity());
             context.write(sql);
+
             context.close();
-        }catch (SQLException ex) {
-            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
-            System.err.println( ex);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void update(Team team) {
+        try {
+            context.open();
+
+            String sqlTemplate = """
+                UPDATE "team"
+                SET "name" = '%s', "activity" = '%s'
+                WHERE "id" = '%s';""";
+            String sql = String.format(sqlTemplate, team.getName(), team.getActivity(), team.getId().toString());
+
+            int rows = context.write(sql);
+            if (rows == 0) {
+                context.close();
+                throw new EntityNotFoundException(team.getId());
+            }
+
+            context.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
     public Team get(UUID id) {
-        String sql = "SELECT id, name, activity FROM teams WHERE id = '" + id +"';";
-        try{
+        Team team = null;
+        try {
             context.open();
-            rs = context.read(sql);
-            if (!rs.isBeforeFirst()){
-                System.out.println("Das ResultSet ist leer");
+
+            String sqlTemplate = """
+                SELECT "name", "activity"
+                FROM "team"
+                WHERE "id" = '%s';""";
+            String sql = String.format(sqlTemplate, id.toString());
+
+            ResultSet rs = context.read(sql);
+            if (!rs.next()) {
+                context.close();
+                throw new EntityNotFoundException(id);
+            } else {
+                String name = rs.getString("name");
+                String activity = rs.getString("activity");
+                team = new Team(id, name, activity);
             }
-            while(rs.next()){  
-               team = this.teamFromResultSet(rs);
-            }
+
             context.close();
-        }catch (SQLException ex) {
-            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
-            System.err.println( ex);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return team;
     }
 
     public List<Team> getAll() {
-        String sql = "SELECT id, name, activity FROM teams;";
-        try{
+        List<Team> teams = new ArrayList<>();
+        try {
             context.open();
-            rs = context.read(sql);
-            if (!rs.isBeforeFirst()){
-                System.out.println("Das ResultSet ist leer");
+
+            String sql = """
+                SELECT "id", "name", "activity"
+                FROM "team";""";
+
+            ResultSet rs = context.read(sql);
+            while (rs.next()) {
+                UUID id = UUID.fromString(rs.getString("id"));
+                String name = rs.getString("name");
+                String activity = rs.getString("activity");
+                teams.add(new Team(id, name, activity));
             }
-            while(rs.next()){  
-                teams.add(teamFromResultSet(rs));
-            }
+
             context.close();
-        }catch (SQLException ex) {
-            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
-            System.err.println( ex);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return teams;
     }
 
-    public void update(Team team) {
-        String  sql = "UPDATE teams SET name = "+ team.getName() + ", activity = " + team.getActivity() +" Where id = '" + team.getId().toString() +"';";
-        try{
-            context.open();
-            context.write(sql);
-            context.close();
-        }catch (SQLException ex) {
-            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
-            System.err.println( ex);
-        }
-    }
-
     public void delete(UUID id) {
-        String  sql = "DELETE FROM teams WHERE id = '" + id + "';";
-        try{
+        try {
             context.open();
-            context.write(sql);
+
+            String sqlTemplate = """
+                DELETE FROM "team"
+                WHERE "id" = '%s';""";
+            String sql = String.format(sqlTemplate, id.toString());
+
+            int rows = context.write(sql);
+            if (rows == 0) {
+                context.close();
+                throw new EntityNotFoundException(id);
+            }
+
             context.close();
-        }catch (SQLException ex) {
-            System.err.println("Das SQL-Statement konnte nicht ausgeführt werden!");
-            System.err.println( ex);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    }
-    private Team teamFromResultSet(ResultSet rs) throws SQLException{
-          
-        return new Team(UUID.fromString(rs.getString("id")),rs.getString("name"),rs.getString("activity"));
-    }
-    
-    private String roleToString(Team team){
-        
-        return team.getId().toString()+","+team.getName()+","+team.getActivity();
     }
 
 }
