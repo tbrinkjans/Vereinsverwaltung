@@ -8,8 +8,6 @@ import application.exception.EntityNotFoundException;
 import application.model.Member;
 import application.service.AuthService;
 import application.service.MemberService;
-import application.service.RoleService;
-import application.service.TeamService;
 import application.util.Dialog;
 
 public class LoginGUI extends javax.swing.JFrame {
@@ -147,14 +145,16 @@ public class LoginGUI extends javax.swing.JFrame {
             return;
         }
 
-        openDetailGUI(member);
+        openOverviewGUI();
     }
 
-    private void openDetailGUI(Member member) {
+    private void openOverviewGUI() {
+        dispose();
+
         MemberService memberService = Application.getService(MemberService.class);
-        RoleService roleService = Application.getService(RoleService.class);
-        TeamService teamService = Application.getService(TeamService.class);
-        new MemberDetailGUI(member.getId(), memberService, authService, roleService, teamService).setVisible(true);
+        MemberOverviewGUI gui = new MemberOverviewGUI(memberService, authService);
+
+        gui.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
