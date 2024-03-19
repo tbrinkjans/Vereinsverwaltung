@@ -105,6 +105,9 @@
     <Component class="javax.swing.JButton" name="btnTeams">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teams verwalten"/>
+        <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="authService.getLoggedInMember().hasPermission(Permission.READ_TEAMS)" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeamsActionPerformed"/>

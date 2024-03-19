@@ -7,9 +7,13 @@ VALUES ('27e2fc49-79fc-4bd0-9835-efb0ea6e0994', 'READ_MEMBERS'),
        ('27e2fc49-79fc-4bd0-9835-efb0ea6e0994', 'WRITE_MEMBERS'),
        ('27e2fc49-79fc-4bd0-9835-efb0ea6e0994', 'READ_ROLES'),
        ('27e2fc49-79fc-4bd0-9835-efb0ea6e0994', 'WRITE_ROLES'),
+       ('27e2fc49-79fc-4bd0-9835-efb0ea6e0994', 'READ_TEAMS'),
+       ('27e2fc49-79fc-4bd0-9835-efb0ea6e0994', 'WRITE_TEAMS'),
        ('8d769540-0b4c-4743-881a-0d0f9653e28f', 'READ_MEMBERS'),
        ('8d769540-0b4c-4743-881a-0d0f9653e28f', 'WRITE_MEMBERS'),
-       ('8d769540-0b4c-4743-881a-0d0f9653e28f', 'READ_ROLES');
+       ('8d769540-0b4c-4743-881a-0d0f9653e28f', 'READ_ROLES'),
+       ('8d769540-0b4c-4743-881a-0d0f9653e28f', 'READ_TEAMS'),
+       ('8d769540-0b4c-4743-881a-0d0f9653e28f', 'WRITE_TEAMS');
 
 INSERT INTO "team" ("id", "name", "activity")
 VALUES ('0e8144d1-10e8-4a33-9a7a-030144d3ca30', 'Dortmund', 'Fußball'),
