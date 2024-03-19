@@ -144,26 +144,26 @@ public class MemberDetailGUI extends javax.swing.JFrame {
                         .addComponent(Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(6, 6, 6)
                     .addGroup(pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(T_Nachname, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                        .addComponent(T_Nachname, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                         .addComponent(T_Adresse))));
         pMitgliedLayout.setVerticalGroup(
             pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pMitgliedLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Benutzer_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Benutzer_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(T_ID))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(T_Vorname)
-                        .addComponent(Vorname, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Vorname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Nachname, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Nachname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(T_Nachname))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Adresse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(T_Adresse))
                     .addGap(8, 8, 8)));
 
@@ -186,12 +186,12 @@ public class MemberDetailGUI extends javax.swing.JFrame {
         pRollen.setLayout(pRollenLayout);
         pRollenLayout.setHorizontalGroup(
             pRollenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE));
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE));
         pRollenLayout.setVerticalGroup(
             pRollenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pRollenLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                     .addContainerGap()));
 
         jTabbedPane1.addTab("Rollen", pRollen);
@@ -211,12 +211,12 @@ public class MemberDetailGUI extends javax.swing.JFrame {
         pTeams.setLayout(pTeamsLayout);
         pTeamsLayout.setHorizontalGroup(
             pTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE));
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE));
         pTeamsLayout.setVerticalGroup(
             pTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pTeamsLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                     .addContainerGap()));
 
         jTabbedPane1.addTab("Teams", pTeams);
@@ -236,7 +236,7 @@ public class MemberDetailGUI extends javax.swing.JFrame {
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(Benutzer_löschen))
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
                     .addContainerGap()));
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,8 +301,12 @@ public class MemberDetailGUI extends javax.swing.JFrame {
             memberService.create(member);
             Dialog.showInfoDialog("Mitglied erstellt.", this);
         } else {
-            memberService.update(member);
-            Dialog.showInfoDialog("Mitglied aktualisiert.", this);
+            try {
+                memberService.update(member);
+                Dialog.showInfoDialog("Mitglied aktualisiert.", this);
+            } catch (EntityNotFoundException ex) {
+                Dialog.showErrorDialog("Mitglied nicht vorhanden.", this);
+            }
         }
 
         if (isSelf) {
@@ -316,8 +320,12 @@ public class MemberDetailGUI extends javax.swing.JFrame {
 
     private void deleteMember() {
         if (Dialog.showConfirmDialog("Mitglied wirklich löschen?", this)) {
-            memberService.delete(member.getId());
-            Dialog.showInfoDialog("Mitglied gelöscht.", this);
+            try {
+                memberService.delete(member.getId());
+                Dialog.showInfoDialog("Mitglied gelöscht.", this);
+            } catch (EntityNotFoundException ex) {
+                Dialog.showErrorDialog("Mitglied nicht vorhanden.", this);
+            }
             overviewGUI.updateData(true);
             dispose();
         }

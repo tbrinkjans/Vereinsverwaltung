@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class Dialog {
 
     public static void showInfoDialog(String message, Component parent) {
+        Toolkit.getDefaultToolkit().beep();
         JOptionPane.showMessageDialog(parent, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 

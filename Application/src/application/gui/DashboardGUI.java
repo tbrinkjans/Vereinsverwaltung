@@ -9,6 +9,7 @@ import application.Application;
 import application.enumeration.Permission;
 import application.service.AuthService;
 import application.service.MemberService;
+import application.service.RoleService;
 import application.util.Dialog;
 
 public class DashboardGUI extends javax.swing.JFrame {
@@ -39,7 +40,7 @@ public class DashboardGUI extends javax.swing.JFrame {
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblName.setText("Willkommen, " + authService.getLoggedInMember().getFirstName() + "!");
 
-        btnMember.setText("Mitglider verwalten");
+        btnMember.setText("Mitglieder verwalten");
         btnMember.setEnabled(authService.getLoggedInMember().hasPermission(Permission.READ_MEMBERS));
         btnMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -48,6 +49,7 @@ public class DashboardGUI extends javax.swing.JFrame {
         });
 
         btnRoles.setText("Rollen verwalten");
+        btnRoles.setEnabled(authService.getLoggedInMember().hasPermission(Permission.READ_ROLES));
         btnRoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRolesActionPerformed(evt);
@@ -88,28 +90,28 @@ public class DashboardGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnMember, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRoles, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnTeams, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
                         javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addContainerGap()));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-FIRST:event_btnMemberActionPerformed
+    // <editor-fold defaultstate="collapsed" desc="Event Handling">//GEN-FIRST:event_btnMemberActionPerformed
     private void btnMemberActionPerformed(java.awt.event.ActionEvent evt) {
         openMemberOverview();
     }//GEN-LAST:event_btnMemberActionPerformed
@@ -132,7 +134,8 @@ public class DashboardGUI extends javax.swing.JFrame {
     }
 
     private void openRoleOverview() {
-        // tbc
+        RoleService roleService = Application.getService(RoleService.class);
+        new RoleOverviewGUI(roleService, authService).setVisible(true);
     }
 
     private void openTeamOverview() {

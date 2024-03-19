@@ -9,9 +9,13 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.sqlite.SQLiteErrorCode;
+import org.sqlite.SQLiteException;
+
 import application.database.DatabaseContext;
 import application.enumeration.Permission;
 import application.exception.EntityNotFoundException;
+import application.exception.RestrictedDeleteException;
 import application.model.Role;
 
 public class RoleService {
@@ -170,6 +174,12 @@ public class RoleService {
 
             context.close();
         } catch (SQLException ex) {
+            if (ex instanceof SQLiteException) {
+                SQLiteException exception = (SQLiteException) ex;
+                if (exception.getResultCode() == SQLiteErrorCode.SQLITE_CONSTRAINT_TRIGGER) {
+                    throw new RestrictedDeleteException(id);
+                }
+            }
             ex.printStackTrace();
         }
     }
