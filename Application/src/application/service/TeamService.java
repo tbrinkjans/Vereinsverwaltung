@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.sqlite.SQLiteErrorCode;
+import org.sqlite.SQLiteException;
+
 import application.database.DatabaseContext;
 import application.exception.EntityNotFoundException;
+import application.exception.RestrictedDeleteException;
 import application.model.Team;
 
 public class TeamService {
@@ -125,6 +129,12 @@ public class TeamService {
 
             context.close();
         } catch (SQLException ex) {
+            if (ex instanceof SQLiteException) {
+                SQLiteException exception = (SQLiteException) ex;
+                if (exception.getResultCode() == SQLiteErrorCode.SQLITE_CONSTRAINT_TRIGGER) {
+                    throw new RestrictedDeleteException(id);
+                }
+            }
             ex.printStackTrace();
         }
     }

@@ -167,7 +167,7 @@ public class RoleOverviewGUI extends javax.swing.JFrame {
             return;
         }
 
-        // open detail gui
+        new RoleDetailGUI(id, this, roleService, authService).setVisible(true);
     }
 
     private void startTimer() {

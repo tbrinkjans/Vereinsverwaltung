@@ -144,7 +144,7 @@ public class MemberDetailGUI extends javax.swing.JFrame {
                         .addComponent(Adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(6, 6, 6)
                     .addGroup(pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(T_Nachname, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                        .addComponent(T_Nachname, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                         .addComponent(T_Adresse))));
         pMitgliedLayout.setVerticalGroup(
             pMitgliedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +186,7 @@ public class MemberDetailGUI extends javax.swing.JFrame {
         pRollen.setLayout(pRollenLayout);
         pRollenLayout.setHorizontalGroup(
             pRollenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE));
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE));
         pRollenLayout.setVerticalGroup(
             pRollenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pRollenLayout.createSequentialGroup()
@@ -211,7 +211,7 @@ public class MemberDetailGUI extends javax.swing.JFrame {
         pTeams.setLayout(pTeamsLayout);
         pTeamsLayout.setHorizontalGroup(
             pTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE));
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE));
         pTeamsLayout.setVerticalGroup(
             pTeamsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pTeamsLayout.createSequentialGroup()
@@ -236,13 +236,13 @@ public class MemberDetailGUI extends javax.swing.JFrame {
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(Benutzer_löschen))
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
                     .addContainerGap()));
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(0, 0, 0)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -301,8 +301,12 @@ public class MemberDetailGUI extends javax.swing.JFrame {
             memberService.create(member);
             Dialog.showInfoDialog("Mitglied erstellt.", this);
         } else {
-            memberService.update(member);
-            Dialog.showInfoDialog("Mitglied aktualisiert.", this);
+            try {
+                memberService.update(member);
+                Dialog.showInfoDialog("Mitglied aktualisiert.", this);
+            } catch (EntityNotFoundException ex) {
+                Dialog.showErrorDialog("Mitglied nicht vorhanden.", this);
+            }
         }
 
         if (isSelf) {
@@ -316,8 +320,12 @@ public class MemberDetailGUI extends javax.swing.JFrame {
 
     private void deleteMember() {
         if (Dialog.showConfirmDialog("Mitglied wirklich löschen?", this)) {
-            memberService.delete(member.getId());
-            Dialog.showInfoDialog("Mitglied gelöscht.", this);
+            try {
+                memberService.delete(member.getId());
+                Dialog.showInfoDialog("Mitglied gelöscht.", this);
+            } catch (EntityNotFoundException ex) {
+                Dialog.showErrorDialog("Mitglied nicht vorhanden.", this);
+            }
             overviewGUI.updateData(true);
             dispose();
         }
