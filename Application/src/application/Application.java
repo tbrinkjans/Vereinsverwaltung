@@ -28,7 +28,7 @@ public class Application {
         }
         createDbContext(args[0]);
         registerServices();
-        createStartGUI();
+        openLoginGUI();
     }
 
     public static String getTitle(String title) {
@@ -55,8 +55,7 @@ public class Application {
         context = new DatabaseContext(url);
     }
 
-    private static void createStartGUI() throws Exception {
-        // Look and Feel einrichten
+    private static void openLoginGUI() throws Exception {
         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                 UIManager.setLookAndFeel(info.getClassName());
@@ -64,7 +63,6 @@ public class Application {
             }
         }
 
-        // GUI erstellen
         EventQueue.invokeLater(() -> {
             AuthService authService = getService(AuthService.class);
             new LoginGUI(authService).setVisible(true);

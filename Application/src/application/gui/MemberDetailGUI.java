@@ -1,5 +1,7 @@
 package application.gui;
 
+import java.awt.Window;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,7 +25,9 @@ import application.util.Dialog;
 public class MemberDetailGUI extends javax.swing.JFrame {
 
     private final MemberOverviewGUI overviewGUI;
+
     private final MemberService memberService;
+    private final AuthService authService;
 
     private final List<Role> allRoles;
     private final List<Team> allTeams;
@@ -36,7 +40,9 @@ public class MemberDetailGUI extends javax.swing.JFrame {
 
     public MemberDetailGUI(UUID id, MemberOverviewGUI overviewGUI, MemberService memberService, AuthService authService, RoleService roleService, TeamService teamService) {
         this.overviewGUI = overviewGUI;
+
         this.memberService = memberService;
+        this.authService = authService;
 
         allRoles = roleService.getAll();
         allTeams = teamService.getAll();
@@ -89,7 +95,6 @@ public class MemberDetailGUI extends javax.swing.JFrame {
 
         Speichern.setBackground(new java.awt.Color(0, 255, 153));
         Speichern.setText("Speichern");
-        Speichern.setToolTipText("");
         Speichern.setEnabled(!readOnly);
         Speichern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,8 +305,13 @@ public class MemberDetailGUI extends javax.swing.JFrame {
             Dialog.showInfoDialog("Mitglied aktualisiert.", this);
         }
 
-        overviewGUI.updateData(true);
-        dispose();
+        if (isSelf) {
+            Arrays.stream(Window.getWindows()).forEach(win -> win.dispose());
+            new LoginGUI(authService).setVisible(true);
+        } else {
+            overviewGUI.updateData(true);
+            dispose();
+        }
     }
 
     private void deleteMember() {
