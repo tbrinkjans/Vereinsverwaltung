@@ -10,6 +10,7 @@ import application.enumeration.Permission;
 import application.service.AuthService;
 import application.service.MemberService;
 import application.service.RoleService;
+import application.service.TeamService;
 import application.util.Dialog;
 
 public class DashboardGUI extends javax.swing.JFrame {
@@ -57,6 +58,7 @@ public class DashboardGUI extends javax.swing.JFrame {
         });
 
         btnTeams.setText("Teams verwalten");
+        btnTeams.setEnabled(authService.getLoggedInMember().hasPermission(Permission.READ_TEAMS));
         btnTeams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTeamsActionPerformed(evt);
@@ -139,7 +141,8 @@ public class DashboardGUI extends javax.swing.JFrame {
     }
 
     private void openTeamOverview() {
-        // tbc
+        TeamService teamService = Application.getService(TeamService.class);
+        new TeamOverviewGUI(teamService, authService).setVisible(true);
     }
 
     private void logout() {
