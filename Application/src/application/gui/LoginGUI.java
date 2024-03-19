@@ -3,11 +3,8 @@ package application.gui;
 import javax.swing.ImageIcon;
 
 import application.Application;
-import application.enumeration.Permission;
 import application.exception.EntityNotFoundException;
-import application.model.Member;
 import application.service.AuthService;
-import application.service.MemberService;
 import application.util.Dialog;
 
 public class LoginGUI extends javax.swing.JFrame {
@@ -132,29 +129,19 @@ public class LoginGUI extends javax.swing.JFrame {
             return;
         }
 
-        Member member;
         try {
-            member = authService.authMember(firstName, lastName);
+            authService.authMember(firstName, lastName);
         } catch (EntityNotFoundException ex) {
             Dialog.showErrorDialog("Mitglied nicht vorhanden.", this);
             return;
         }
 
-        if (!member.hasPermission(Permission.READ_MEMBERS)) {
-            Dialog.showErrorDialog("Keine Berechtigung.", this);
-            return;
-        }
-
-        openOverviewGUI();
+        openDashboardGUI();
     }
 
-    private void openOverviewGUI() {
+    private void openDashboardGUI() {
         dispose();
-
-        MemberService memberService = Application.getService(MemberService.class);
-        MemberOverviewGUI gui = new MemberOverviewGUI(memberService, authService);
-
-        gui.setVisible(true);
+        new DashboardGUI(authService).setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

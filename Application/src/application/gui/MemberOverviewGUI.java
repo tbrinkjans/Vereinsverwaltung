@@ -49,7 +49,7 @@ public class MemberOverviewGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOverview = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(Application.getTitle("Mitglieder"));
         setIconImage(new ImageIcon("res\\icon.png").getImage());
 
