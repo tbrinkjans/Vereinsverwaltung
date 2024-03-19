@@ -168,7 +168,7 @@ public class TeamOverviewGUI extends javax.swing.JFrame {
             return;
         }
 
-        // open detail gui
+        new TeamDetailGUI(id, this, teamService, authService).setVisible(true);
     }
 
     private void startTimer() {
