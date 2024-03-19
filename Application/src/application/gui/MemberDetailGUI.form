@@ -38,34 +38,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSeparator1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Nachname" pref="65" max="32767" attributes="0"/>
-                          <Component id="Adresse" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="T_Nachname" max="32767" attributes="0"/>
-                          <Component id="T_Adresse" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Vorname" max="32767" attributes="0"/>
-                          <Component id="Benutzer_ID" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="T_ID" pref="297" max="32767" attributes="0"/>
-                          <Component id="T_Vorname" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="Speichern" pref="279" max="32767" attributes="0"/>
+                      <Component id="Speichern" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Benutzer_löschen" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -75,86 +54,32 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Benutzer_ID" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="T_ID" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="T_Vorname" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Vorname" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Nachname" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="T_Nachname" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Adresse" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="T_Adresse" alignment="3" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="3" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="Speichern" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Benutzer_löschen" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSeparator2" max="32767" attributes="0"/>
+                  <Component id="jSeparator2" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="T_Nachname">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="initial != null ? initial.getLastName() : &quot;&quot;" type="code"/>
-        </Property>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-      </AccessibilityProperties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Nachname">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nachname"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Vorname">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Vorname"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="T_Vorname">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="initial != null ? initial.getFirstName() : &quot;&quot;" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Adresse">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Adresse"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="T_Adresse">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="initial != null ? initial.getAddress() : &quot;&quot;" type="code"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="Benutzer_l&#xf6;schen">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="0" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="L&#xf6;schen" postCode="Benutzer_l&#xf6;schen.setEnabled(initial != null);"/>
+        <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+        <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="!readOnly &amp;&amp; !isNew &amp;&amp; !isSelf" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Benutzer_l&#xf6;schenActionPerformed"/>
@@ -167,23 +92,13 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Speichern"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="!readOnly" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SpeichernActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="Benutzer_ID">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ID"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="T_ID">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="initial != null ? initial.getId().toString() : &quot;&quot;" type="code"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -192,5 +107,250 @@
         <Property name="orientation" type="int" value="1"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="pMitglied">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Mitglied">
+                <Property name="tabTitle" type="java.lang.String" value="Mitglied"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="Benutzer_ID" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="Vorname" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="T_Vorname" pref="323" max="32767" attributes="0"/>
+                          <Component id="T_ID" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="Nachname" max="32767" attributes="0"/>
+                          <Component id="Adresse" min="-2" pref="65" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="T_Nachname" pref="323" max="32767" attributes="0"/>
+                          <Component id="T_Adresse" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Benutzer_ID" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="T_ID" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="T_Vorname" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Vorname" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Nachname" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="T_Nachname" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Adresse" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="T_Adresse" alignment="3" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="Vorname">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Vorname:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="T_Vorname">
+              <Properties>
+                <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="!readOnly" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="member.getFirstName()" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="Adresse">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Adresse:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="T_Adresse">
+              <Properties>
+                <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="!readOnly" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="member.getAddress()" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="Benutzer_ID">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ID:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="T_ID">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="member.getId().toString()" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="T_Nachname">
+              <Properties>
+                <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="!readOnly" type="code"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="member.getLastName()" type="code"/>
+                </Property>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="Nachname">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nachname:"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pRollen">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Rollen">
+                <Property name="tabTitle" type="java.lang.String" value="Rollen"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" alignment="1" pref="394" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="108" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="lRollen">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="DefaultListModel&lt;String&gt; lRollenModel = new DefaultListModel&lt;&gt;();&#xa;lRollenModel.addAll(allRoles.stream().map(role -&gt; role.getName()).collect(Collectors.toList()));">
+                      <Connection code="lRollenModel" type="code"/>
+                    </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Standardcursor"/>
+                    </Property>
+                    <Property name="selectedIndices" type="[I" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="List&lt;UUID&gt; allRoleIds = allRoles.stream().map(role -&gt; role.getId()).collect(Collectors.toList());&#xa;Stream&lt;UUID&gt; selectedRoleIds = member.getRoles().stream().map(role -&gt; role.getId());&#xa;int[] lRollenIndices = selectedRoleIds.mapToInt(id -&gt; allRoleIds.indexOf(id)).toArray();" postCode="lRollen.setEnabled(!readOnly &amp;&amp; !isSelf);">
+                      <Connection code="lRollenIndices" type="code"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pTeams">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Teams">
+                <Property name="tabTitle" type="java.lang.String" value="Teams"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" alignment="1" pref="394" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" pref="108" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="lTeams">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="DefaultListModel&lt;String&gt; lTeamsModel = new DefaultListModel&lt;&gt;();&#xa;lTeamsModel.addAll(allTeams.stream().map(team -&gt; team.getName()).collect(Collectors.toList()));">
+                      <Connection code="lTeamsModel" type="code"/>
+                    </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Standardcursor"/>
+                    </Property>
+                    <Property name="selectedIndices" type="[I" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="List&lt;UUID&gt; allTeamIds = allTeams.stream().map(team -&gt; team.getId()).collect(Collectors.toList());&#xa;Stream&lt;UUID&gt; selectedTeamIds = member.getTeams().stream().map(team -&gt; team.getId());&#xa;int[] lTeamsIndices = selectedTeamIds.mapToInt(id -&gt; allTeamIds.indexOf(id)).toArray();" postCode="lTeams.setEnabled(!readOnly &amp;&amp; !isSelf);">
+                      <Connection code="lTeamsIndices" type="code"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

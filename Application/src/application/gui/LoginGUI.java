@@ -8,6 +8,8 @@ import application.exception.EntityNotFoundException;
 import application.model.Member;
 import application.service.AuthService;
 import application.service.MemberService;
+import application.service.RoleService;
+import application.service.TeamService;
 import application.util.Dialog;
 
 public class LoginGUI extends javax.swing.JFrame {
@@ -70,13 +72,11 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE,
-                            javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                                .addComponent(lblFirstName, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(tfLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
@@ -88,16 +88,15 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblFirstName)
-                        .addComponent(tfFirstName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                            javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                            javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfLastName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                            javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                            javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblLastName))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnLogin)
                     .addContainerGap()));
@@ -153,7 +152,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void openDetailGUI(Member member) {
         MemberService memberService = Application.getService(MemberService.class);
-        new MemberDetailGUI(member.getId(), memberService).setVisible(true);
+        RoleService roleService = Application.getService(RoleService.class);
+        TeamService teamService = Application.getService(TeamService.class);
+        new MemberDetailGUI(member.getId(), memberService, authService, roleService, teamService).setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
