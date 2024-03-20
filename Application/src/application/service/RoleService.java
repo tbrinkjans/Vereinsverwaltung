@@ -31,7 +31,7 @@ public class RoleService {
             context.open();
 
             String roleSqlTemplate =
-                "INSERT INTO \"role\" (\"id\", \"name\", \"description\") "+
+                "INSERT INTO \"role\" (\"id\", \"name\", \"description\") " +
                 "VALUES ('%s', '%s', '%s');";
             String roleSql = String.format(roleSqlTemplate, role.getId().toString(), role.getName(), role.getDescription());
             context.write(roleSql);
@@ -42,7 +42,7 @@ public class RoleService {
                     .reduce((a, b) -> a + ", " + b);
 
                 String permissionsSqlTemplate =
-                    "INSERT INTO \"role_permission\" (\"role_id\", \"permission\") "+
+                    "INSERT INTO \"role_permission\" (\"role_id\", \"permission\") " +
                     "VALUES %s;";
                 String permissionsSql = String.format(permissionsSqlTemplate, permissions.get());
                 context.write(permissionsSql);
@@ -58,9 +58,9 @@ public class RoleService {
         try {
             context.open();
 
-            String roleSqlTemplate = 
-                "UPDATE \"role\" "+
-                "SET \"name\" = '%s', \"description\" = '%s' "+
+            String roleSqlTemplate =
+                "UPDATE \"role\" " +
+                "SET \"name\" = '%s', \"description\" = '%s' " +
                 "WHERE \"id\" = '%s';";
             String roleSql = String.format(roleSqlTemplate, role.getName(), role.getDescription(), role.getId().toString());
 
@@ -71,7 +71,7 @@ public class RoleService {
             }
 
             String permissionsSqlTemplate =
-                "DELETE FROM \"role_permission\" "+
+                "DELETE FROM \"role_permission\" " +
                 "WHERE \"role_id\" = '%s';";
             String permissionsSql = String.format(permissionsSqlTemplate, role.getId().toString());
             context.write(permissionsSql);
@@ -81,8 +81,8 @@ public class RoleService {
                     .map(permission -> "('" + role.getId().toString() + "', '" + permission.toString() + "')")
                     .reduce((a, b) -> a + ", " + b);
 
-                permissionsSqlTemplate = 
-                    "INSERT INTO \"role_permission\" (\"role_id\", \"permission\") "+
+                permissionsSqlTemplate =
+                    "INSERT INTO \"role_permission\" (\"role_id\", \"permission\") " +
                     "VALUES %s;";
                 permissionsSql = String.format(permissionsSqlTemplate, permissions.get());
                 context.write(permissionsSql);
@@ -99,10 +99,10 @@ public class RoleService {
         try {
             context.open();
 
-            String roleSqlTemplate = 
-                "SELECT r.\"name\", r.\"description\", GROUP_CONCAT(rp.\"permission\") AS \"permissions\" "+
-                "FROM \"role\" r "+
-                "LEFT JOIN \"role_permission\" rp ON r.\"id\" = rp.\"role_id\" "+
+            String roleSqlTemplate =
+                "SELECT r.\"name\", r.\"description\", GROUP_CONCAT(rp.\"permission\") AS \"permissions\" " +
+                "FROM \"role\" r " +
+                "LEFT JOIN \"role_permission\" rp ON r.\"id\" = rp.\"role_id\" " +
                 "WHERE r.\"id\" = '%s';";
             String roleSql = String.format(roleSqlTemplate, id.toString());
 
@@ -138,8 +138,8 @@ public class RoleService {
         try {
             context.open();
 
-            String sql = 
-                "SELECT \"id\", \"name\", \"description\" "+
+            String sql =
+                "SELECT \"id\", \"name\", \"description\" " +
                 "FROM \"role\";";
 
             ResultSet rs = context.read(sql);
@@ -161,9 +161,9 @@ public class RoleService {
         try {
             context.open();
 
-            String sqlTemplate = 
-                "DELETE FROM \"role\" "+
-                "WHERE \"id\" = \"%s\";";
+            String sqlTemplate =
+                "DELETE FROM \"role\" " +
+                "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
             int rows = context.write(sql);

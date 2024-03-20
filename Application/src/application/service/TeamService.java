@@ -26,8 +26,8 @@ public class TeamService {
         try {
             context.open();
 
-            String sqlTemplate = 
-                "INSERT INTO \"team\" (\"id\", \"name\", \"activity\") "+
+            String sqlTemplate =
+                "INSERT INTO \"team\" (\"id\", \"name\", \"activity\") " +
                 "VALUES ('%s', '%s', '%s');";
             String sql = String.format(sqlTemplate, team.getId().toString(), team.getName(), team.getActivity());
             context.write(sql);
@@ -42,9 +42,9 @@ public class TeamService {
         try {
             context.open();
 
-            String sqlTemplate = 
-                "UPDATE \"team\" "+
-                "SET \"name\" = \"%s\", \"activity\" = \"%s\" "+
+            String sqlTemplate =
+                "UPDATE \"team\" " +
+                "SET \"name\" = '%s', \"activity\" = '%s' " +
                 "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, team.getName(), team.getActivity(), team.getId().toString());
 
@@ -66,8 +66,8 @@ public class TeamService {
             context.open();
 
             String sqlTemplate =
-                "SELECT \"name\", \"activity\" "+
-                "FROM \"team\" "+
+                "SELECT \"name\", \"activity\" " +
+                "FROM \"team\" " +
                 "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
@@ -93,8 +93,8 @@ public class TeamService {
         try {
             context.open();
 
-            String sql = 
-                "SELECT \"id\", \"name\", \"activity\" "+
+            String sql =
+                "SELECT \"id\", \"name\", \"activity\" " +
                 "FROM \"team\";";
 
             ResultSet rs = context.read(sql);
@@ -116,8 +116,8 @@ public class TeamService {
         try {
             context.open();
 
-            String sqlTemplate = 
-                "DELETE FROM \"team\" "+
+            String sqlTemplate =
+                "DELETE FROM \"team\" " +
                 "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
