@@ -30,9 +30,9 @@ public class RoleService {
         try {
             context.open();
 
-            String roleSqlTemplate = """
-                INSERT INTO "role" ("id", "name", "description")
-                VALUES ('%s', '%s', '%s');""";
+            String roleSqlTemplate =
+                "INSERT INTO \"role\" (\"id\", \"name\", \"description\") "+
+                "VALUES ('%s', '%s', '%s');";
             String roleSql = String.format(roleSqlTemplate, role.getId().toString(), role.getName(), role.getDescription());
             context.write(roleSql);
 
@@ -41,9 +41,9 @@ public class RoleService {
                     .map(permission -> "('" + role.getId().toString() + "', '" + permission.toString() + "')")
                     .reduce((a, b) -> a + ", " + b);
 
-                String permissionsSqlTemplate = """
-                    INSERT INTO "role_permission" ("role_id", "permission")
-                    VALUES %s;""";
+                String permissionsSqlTemplate =
+                    "INSERT INTO \"role_permission\" (\"role_id\", \"permission\") "+
+                    "VALUES %s;";
                 String permissionsSql = String.format(permissionsSqlTemplate, permissions.get());
                 context.write(permissionsSql);
             }
@@ -58,10 +58,10 @@ public class RoleService {
         try {
             context.open();
 
-            String roleSqlTemplate = """
-                UPDATE "role"
-                SET "name" = '%s', "description" = '%s'
-                WHERE "id" = '%s';""";
+            String roleSqlTemplate = 
+                "UPDATE \"role\" "+
+                "SET \"name\" = '%s', \"description\" = '%s' "+
+                "WHERE \"id\" = '%s';";
             String roleSql = String.format(roleSqlTemplate, role.getName(), role.getDescription(), role.getId().toString());
 
             int rows = context.write(roleSql);
@@ -70,9 +70,9 @@ public class RoleService {
                 throw new EntityNotFoundException(role.getId());
             }
 
-            String permissionsSqlTemplate = """
-                DELETE FROM "role_permission"
-                WHERE "role_id" = '%s';""";
+            String permissionsSqlTemplate =
+                "DELETE FROM \"role_permission\" "+
+                "WHERE \"role_id\" = '%s';";
             String permissionsSql = String.format(permissionsSqlTemplate, role.getId().toString());
             context.write(permissionsSql);
 
@@ -81,9 +81,9 @@ public class RoleService {
                     .map(permission -> "('" + role.getId().toString() + "', '" + permission.toString() + "')")
                     .reduce((a, b) -> a + ", " + b);
 
-                permissionsSqlTemplate = """
-                    INSERT INTO "role_permission" ("role_id", "permission")
-                    VALUES %s;""";
+                permissionsSqlTemplate = 
+                    "INSERT INTO \"role_permission\" (\"role_id\", \"permission\") "+
+                    "VALUES %s;";
                 permissionsSql = String.format(permissionsSqlTemplate, permissions.get());
                 context.write(permissionsSql);
             }
@@ -100,10 +100,10 @@ public class RoleService {
             context.open();
 
             String roleSqlTemplate = 
-                "SELECT r.'name', r.'description', GROUP_CONCAT(rp.'permission') AS 'permissions' "+
-                "FROM 'role' r "+
-                "LEFT JOIN 'role_permission' rp ON r.'id' = rp.'role_id' "+
-                "WHERE r.'id' = '%s';";
+                "SELECT r.\"name\", r.\"description\", GROUP_CONCAT(rp.\"permission\") AS \"permissions\" "+
+                "FROM \"role\" r "+
+                "LEFT JOIN \"role_permission\" rp ON r.\"id\" = rp.\"role_id\" "+
+                "WHERE r.\"id\" = '%s';";
             String roleSql = String.format(roleSqlTemplate, id.toString());
 
             ResultSet rs = context.read(roleSql);
@@ -139,8 +139,8 @@ public class RoleService {
             context.open();
 
             String sql = 
-                "SELECT 'id', 'name', 'description' "+
-                "FROM 'role';";
+                "SELECT \"id\", \"name\", \"description\" "+
+                "FROM \"role\";";
 
             ResultSet rs = context.read(sql);
             while (rs.next()) {
@@ -162,8 +162,8 @@ public class RoleService {
             context.open();
 
             String sqlTemplate = 
-                "DELETE FROM 'role' "+
-                "WHERE 'id' = '%s';";
+                "DELETE FROM \"role\" "+
+                "WHERE \"id\" = \"%s\";";
             String sql = String.format(sqlTemplate, id.toString());
 
             int rows = context.write(sql);
