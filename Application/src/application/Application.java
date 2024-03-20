@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import application.database.DatabaseContext;
+import application.database.DatabaseHelper;
 import application.gui.LoginGUI;
 import application.service.AuthService;
 import application.service.MemberService;
@@ -22,11 +23,8 @@ public class Application {
     private static DatabaseContext context;
 
     public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
-            System.err.println("Pfad zur Datenbank nicht gefunden!");
-            return;
-        }
-        createDbContext(args[0]);
+        String url = args.length == 0 ? (NAME + ".db") : args[0];
+        createDbContext(url);
         registerServices();
         openLoginGUI();
     }
@@ -53,6 +51,7 @@ public class Application {
 
     private static void createDbContext(String url) {
         context = new DatabaseContext(url);
+        DatabaseHelper.setupDatabase(context);
     }
 
     private static void openLoginGUI() throws Exception {
