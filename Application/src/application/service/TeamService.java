@@ -27,7 +27,7 @@ public class TeamService {
             context.open();
 
             String sqlTemplate = 
-                "INSERT INTO 'team' ('id', 'name', 'activity') "+
+                "INSERT INTO \"team\" (\"id\", \"name\", \"activity\") "+
                 "VALUES ('%s', '%s', '%s');";
             String sql = String.format(sqlTemplate, team.getId().toString(), team.getName(), team.getActivity());
             context.write(sql);
@@ -43,9 +43,9 @@ public class TeamService {
             context.open();
 
             String sqlTemplate = 
-                "UPDATE 'team' "+
-                "SET 'name' = '%s', 'activity' = '%s' "+
-                "WHERE 'id' = '%s';";
+                "UPDATE \"team\" "+
+                "SET \"name\" = \"%s\", \"activity\" = \"%s\" "+
+                "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, team.getName(), team.getActivity(), team.getId().toString());
 
             int rows = context.write(sql);
@@ -66,9 +66,9 @@ public class TeamService {
             context.open();
 
             String sqlTemplate =
-                "SELECT 'name', 'activity' "+
-                "FROM 'team' "+
-                "WHERE 'id' = '%s';";
+                "SELECT \"name\", \"activity\" "+
+                "FROM \"team\" "+
+                "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
             ResultSet rs = context.read(sql);
@@ -94,8 +94,8 @@ public class TeamService {
             context.open();
 
             String sql = 
-                "SELECT 'id', 'name', 'activity' "+
-                "FROM 'team';";
+                "SELECT \"id\", \"name\", \"activity\" "+
+                "FROM \"team\";";
 
             ResultSet rs = context.read(sql);
             while (rs.next()) {
@@ -117,8 +117,8 @@ public class TeamService {
             context.open();
 
             String sqlTemplate = 
-                "DELETE FROM 'team' "+
-                "WHERE 'id' = '%s';";
+                "DELETE FROM \"team\" "+
+                "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
             int rows = context.write(sql);

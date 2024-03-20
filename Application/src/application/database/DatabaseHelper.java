@@ -18,9 +18,9 @@ public class DatabaseHelper {
             context.open();
 
             String sql = 
-                "SELECT COUNT(*) AS 'tableCount' "+
-                "FROM 'sqlite_master' "+
-                "WHERE 'type' = 'table';";
+                "SELECT COUNT(*) AS \"tableCount\" "+
+                "FROM \"sqlite_master\" "+
+                "WHERE \"type\" = 'table';";
 
             ResultSet rs = context.read(sql);
             if (rs.next() && rs.getInt("tableCount") == 0) {

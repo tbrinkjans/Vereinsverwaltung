@@ -29,7 +29,7 @@ public class MemberService {
             context.open();
 
             String memberSqlTemplate =
-                "INSERT INTO 'member' ('id', 'first_name', 'last_name', 'address') " +
+                "INSERT INTO \"member\" (\"id\", \"first_name\", \"last_name\", \"address\") " +
                 "VALUES ('%s', '%s', '%s', '%s');";
             String memberSql = String.format(memberSqlTemplate, member.getId().toString(), member.getFirstName(), member.getLastName(), member.getAddress());
             context.write(memberSql);
@@ -40,7 +40,7 @@ public class MemberService {
                     .reduce((a, b) -> a + ", " + b);
 
                 String rolesSqlTemplate =
-                    "INSERT INTO 'member_role' ('member_id', 'role_id') " +
+                    "INSERT INTO \"member_role\" (\"member_id\", \"role_id\") " +
                     "VALUES %s;";
                 String rolesSql = String.format(rolesSqlTemplate, roles.get());
                 context.write(rolesSql);
@@ -52,7 +52,7 @@ public class MemberService {
                     .reduce((a, b) -> a + ", " + b);
 
                 String teamsSqlTemplate =
-                    "INSERT INTO 'member_team' ('member_id', 'team_id') "+
+                    "INSERT INTO \"member_team\" (\"member_id\", \"team_id\") "+
                     "VALUES %s;";
                 String teamsSql = String.format(teamsSqlTemplate, teams.get());
                 context.write(teamsSql);
@@ -69,9 +69,9 @@ public class MemberService {
             context.open();
 
             String memberSqlTemplate = 
-                "UPDATE 'member' "+
-                "SET 'first_name' = '%s', 'last_name' = '%s', 'address' = '%s' "+
-                "WHERE 'id' = '%s';";
+                "UPDATE \"member\" "+
+                "SET \"first_name\" = \"%s\", \"last_name\" = \"%s\", \"address\" = \"%s\" "+
+                "WHERE \"id\" = \"%s\";";
             String memberSql = String.format(memberSqlTemplate, member.getFirstName(), member.getLastName(), member.getAddress(), member.getId().toString());
 
             int rows = context.write(memberSql);
@@ -81,8 +81,8 @@ public class MemberService {
             }
 
             String rolesSqlTemplate =
-                "DELETE FROM 'member_role' "+
-                "WHERE 'member_id' = '%s';";
+                "DELETE FROM \"member_role\" "+
+                "WHERE \"member_id\" = \"%s\";";
             String rolesSql = String.format(rolesSqlTemplate, member.getId().toString());
             context.write(rolesSql);
 
@@ -92,15 +92,15 @@ public class MemberService {
                     .reduce((a, b) -> a + ", " + b);
 
                 rolesSqlTemplate = 
-                    "INSERT INTO 'member_role' ('member_id', 'role_id') "+
+                    "INSERT INTO \"member_role\" (\"member_id\", \"role_id\") "+
                     "VALUES %s;";
                 rolesSql = String.format(rolesSqlTemplate, roles.get());
                 context.write(rolesSql);
             }
 
             String teamsSqlTemplate = 
-                "DELETE FROM 'member_team' "+
-                "WHERE 'member_id' = '%s';";
+                "DELETE FROM \"member_team\" "+
+                "WHERE \"member_id\" = '%s';";
             String teamsSql = String.format(teamsSqlTemplate, member.getId().toString());
             context.write(teamsSql);
 
@@ -110,7 +110,7 @@ public class MemberService {
                     .reduce((a, b) -> a + ", " + b);
 
                 teamsSqlTemplate =
-                    "INSERT INTO 'member_team' ('member_id', 'team_id') "+
+                    "INSERT INTO \"member_team\" (\"member_id\", \"team_id\") "+
                     "VALUES %s;";
                 teamsSql = String.format(teamsSqlTemplate, teams.get());
                 context.write(teamsSql);
@@ -128,18 +128,18 @@ public class MemberService {
             context.open();
 
             String memberSqlTemplate =
-                "SELECT m.'first_name', m.'last_name', m.'address', mr.'role_id', rrp.'name', rrp.'description', rrp.'permissions', mt.'team_id', t.'name', t.'activity' "+
-                "FROM 'member' m "+
-                "LEFT JOIN 'member_role' mr ON m.'id' = mr.'member_id' "+
+                "SELECT m.\"first_name\", m.\"last_name\", m.\"address\", mr.\"role_id\", rrp.\"name\", rrp.\"description\", rrp.\"permissions\", mt.\"team_id\", t.\"name\", t.\"activity\" "+
+                "FROM \"member\" m "+
+                "LEFT JOIN \"member_role\" mr ON m.\"id\" = mr.\"member_id\" "+
                 "LEFT JOIN ( "+
-                    "SELECT r.'id', r.'name', r.'description', GROUP_CONCAT(rp.'permission') AS 'permissions' "+
-                    "FROM 'role' r "+
-                    "LEFT JOIN 'role_permission' rp ON r.'id' = rp.'role_id' "+
-                    "GROUP BY r.'id' "+
-                ") rrp ON mr.'role_id' = rrp.'id' "+
-                "LEFT JOIN 'member_team' mt ON m.'id' = mt.'member_id' "+
-                "LEFT JOIN 'team' t ON mt.'team_id' = t.'id' "+
-                "WHERE m.'id' = '%s';";
+                    "SELECT r.\"id\", r.\"name\", r.\"description\", GROUP_CONCAT(rp.\"permission\") AS \"permissions\" "+
+                    "FROM \"role\" r "+
+                    "LEFT JOIN \"role_permission\" rp ON r.\"id\" = rp.\"role_id\" "+
+                    "GROUP BY r.\"id\" "+
+                ") rrp ON mr.\"role_id\" = rrp.\"id\" "+
+                "LEFT JOIN \"member_team\" mt ON m.\"id\" = mt.\"member_id\" "+
+                "LEFT JOIN \"team\" t ON mt.\"team_id\" = t.\"id\" "+
+                "WHERE m.\"id\" = '%s';";
             String memberSql = String.format(memberSqlTemplate, id.toString());
 
             ResultSet rs = context.read(memberSql);
@@ -199,8 +199,8 @@ public class MemberService {
             context.open();
 
             String sql =
-                "SELECT 'id', 'first_name', 'last_name', 'address' "+
-                "FROM 'member';";
+                "SELECT \"id\", \"first_name\", \"last_name\", \"address\" "+
+                "FROM \"member\";";
 
             ResultSet rs = context.read(sql);
             while (rs.next()) {
@@ -223,8 +223,8 @@ public class MemberService {
             context.open();
 
             String sqlTemplate =
-                "DELETE FROM 'member' "+
-                "WHERE 'id' = '%s';";
+                "DELETE FROM \"member\" "+
+                "WHERE \"id\" = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
             int rows = context.write(sql);

@@ -31,18 +31,18 @@ public class AuthService {
             context.open();
 
             String memberSqlTemplate = 
-                "SELECT m.'id', m.'first_name', m.'last_name', m.'address', mr.'role_id', rrp.'name', rrp.'description', rrp.'permissions', mt.'team_id', t.'name', t.'activity' "+
-                "FROM 'member' m "+
-                "LEFT JOIN 'member_role' mr ON m.'id' = mr.'member_id' "+
+                "SELECT m.\"id\", m.\"first_name\", m.\"last_name\", m.\"address\", mr.\"role_id\", rrp.\"name\", rrp.\"description\", rrp.\"permissions\", mt.\"team_id\", t.\"name\", t.\"activity\" "+
+                "FROM \"member\" m "+
+                "LEFT JOIN \"member_role\" mr ON m.\"id\" = mr.\"member_id\" "+
                 "LEFT JOIN ( "+
-                    "SELECT r.'id', r.'name', r.'description', GROUP_CONCAT(rp.'permission') AS 'permissions' "+
-                    "FROM 'role' r "+
-                    "LEFT JOIN 'role_permission' rp ON r.'id' = rp.'role_id' "+
-                    "GROUP BY r.'id' "+
-                ") rrp ON mr.'role_id' = rrp.'id' "+
-                "LEFT JOIN 'member_team' mt ON m.'id' = mt.'member_id' "+
-                "LEFT JOIN 'team' t ON mt.'team_id' = t.'id' "+
-                "WHERE (lower(m.'first_name') = lower('%s')) AND (lower(m.'last_name') = lower('%s')); ";
+                    "SELECT r.\"id\", r.\"name\", r.\"description\", GROUP_CONCAT(rp.\"permission\") AS \"permissions\" "+
+                    "FROM \"role\" r "+
+                    "LEFT JOIN \"role_permission\" rp ON r.\"id\" = rp.\"role_id\" "+
+                    "GROUP BY r.\"id\" "+
+                ") rrp ON mr.\"role_id\" = rrp.\"id\" "+
+                "LEFT JOIN \"member_team\" mt ON m.\"id\" = mt.\"member_id\" "+
+                "LEFT JOIN \"team\" t ON mt.\"team_id\" = t.\"id\" "+
+                "WHERE (lower(m.\"first_name\") = lower('%s')) AND (lower(m.'last_name') = lower('%s')); ";
             String memberSql = String.format(memberSqlTemplate, firstName, lastName);
 
             ResultSet rs = context.read(memberSql);
