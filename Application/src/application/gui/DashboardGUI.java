@@ -3,8 +3,6 @@ package application.gui;
 import java.awt.Window;
 import java.util.Arrays;
 
-import javax.swing.ImageIcon;
-
 import application.Application;
 import application.enumeration.Permission;
 import application.service.AuthService;
@@ -12,6 +10,7 @@ import application.service.MemberService;
 import application.service.RoleService;
 import application.service.TeamService;
 import application.util.Dialog;
+import application.util.ImageLoader;
 
 public class DashboardGUI extends javax.swing.JFrame {
 
@@ -35,14 +34,15 @@ public class DashboardGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(Application.getTitle("Dashboard"));
-        setIconImage(new ImageIcon("res\\icon.png").getImage());
+        setIconImage(ImageLoader.getImage("icon.png"));
 
         lblName.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblName.setText("Willkommen, " + authService.getLoggedInMember().getFirstName() + "!");
 
         btnMember.setText("Mitglieder verwalten");
-        btnMember.setEnabled(authService.getLoggedInMember().hasPermission(Permission.READ_MEMBERS));
+        btnMember.setEnabled(authService.getLoggedInMember().hasPermission(Permission.READ_MEMBERS)
+        );
         btnMember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMemberActionPerformed(evt);
@@ -77,37 +77,37 @@ public class DashboardGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator1)
-                        .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRoles, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                        .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                        .addComponent(jSeparator2)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
-                    .addContainerGap()));
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRoles, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(jSeparator2)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnRoles, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addContainerGap()));
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMember, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRoles, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTeams, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         pack();
         setLocationRelativeTo(null);

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -17,6 +16,7 @@ import application.model.Role;
 import application.service.AuthService;
 import application.service.RoleService;
 import application.util.Dialog;
+import application.util.ImageLoader;
 
 public class RoleOverviewGUI extends javax.swing.JFrame {
 
@@ -49,7 +49,7 @@ public class RoleOverviewGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(Application.getTitle("Rollen"));
-        setIconImage(new ImageIcon("res\\icon.png").getImage());
+        setIconImage(ImageLoader.getImage("icon.png"));
 
         tfSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -79,27 +79,28 @@ public class RoleOverviewGUI extends javax.swing.JFrame {
 
         tblOverview.setAutoCreateRowSorter(true);
         tblOverview.setModel(new javax.swing.table.DefaultTableModel(
-            new Object[][] {
+            new Object [][] {
 
             },
-            new String[] {
+            new String [] {
                 "ID", "Name", "Beschreibung"
-            }) {
+            }
+        ) {
             @SuppressWarnings("rawtypes")
-            Class[] types = new Class[] {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean[] {
+            boolean[] canEdit = new boolean [] {
                 false, false, false
             };
 
             @SuppressWarnings({ "rawtypes", "unchecked" })
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         tblOverview.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -114,34 +115,34 @@ public class RoleOverviewGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator2)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(tfSearch)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnAdd))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
-                    .addContainerGap()));
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdd))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd)))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                    .addContainerGap()));
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         pack();
         setLocationRelativeTo(null);

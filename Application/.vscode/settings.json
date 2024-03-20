@@ -9,7 +9,8 @@
     // project settings
     "java.project.outputPath": "build",
     "java.project.sourcePaths": [
-        "src"
+        "src",
+        "res"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
