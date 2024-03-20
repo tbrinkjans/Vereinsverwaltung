@@ -99,11 +99,11 @@ public class RoleService {
         try {
             context.open();
 
-            String roleSqlTemplate = """
-                SELECT r."name", r."description", GROUP_CONCAT(rp."permission") AS "permissions"
-                FROM "role" r
-                LEFT JOIN "role_permission" rp ON r."id" = rp."role_id"
-                WHERE r."id" = '%s';""";
+            String roleSqlTemplate = 
+                "SELECT r.'name', r.'description', GROUP_CONCAT(rp.'permission') AS 'permissions' "+
+                "FROM 'role' r "+
+                "LEFT JOIN 'role_permission' rp ON r.'id' = rp.'role_id' "+
+                "WHERE r.'id' = '%s';";
             String roleSql = String.format(roleSqlTemplate, id.toString());
 
             ResultSet rs = context.read(roleSql);
@@ -138,9 +138,9 @@ public class RoleService {
         try {
             context.open();
 
-            String sql = """
-                SELECT "id", "name", "description"
-                FROM "role";""";
+            String sql = 
+                "SELECT 'id', 'name', 'description' "+
+                "FROM 'role';";
 
             ResultSet rs = context.read(sql);
             while (rs.next()) {
@@ -161,9 +161,9 @@ public class RoleService {
         try {
             context.open();
 
-            String sqlTemplate = """
-                DELETE FROM "role"
-                WHERE "id" = '%s';""";
+            String sqlTemplate = 
+                "DELETE FROM 'role' "+
+                "WHERE 'id' = '%s';";
             String sql = String.format(sqlTemplate, id.toString());
 
             int rows = context.write(sql);
